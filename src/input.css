@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Дополнительные стили для плавности */
+.submenu-group:hover .submenu {
+   opacity: 1;
+   visibility: visible;
+   transform: translateY(0);
+}
+
+.submenu-item:hover .subsubmenu {
+   opacity: 1;
+   visibility: visible;
+   transform: translateX(0);
+}
+
+/* Стили для мобильного меню */
+@media (max-width: 768px) {
+   .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+   }
+
+   .mobile-menu.active {
+      max-height: 500px;
+   }
+}

@@ -1,14 +1,306 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Григорьева Ольга - Недкижимость СПб (Купля\Продажа)</title>
   <link href="/output.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
-  <h1 class="text-3xl font-bold text-blue-600 p-8">
-    Tailwind CSS успешно установлен! 🎉
-  </h1>
+
+<body class="bg-gray-50 min-h-screen p-4 md:p-6">
+  <nav class="max-w-7xl mx-auto">
+    <!-- Десктопное меню -->
+    <div class="hidden md:block bg-green-100/70 backdrop-blur-sm rounded-xl shadow-lg">
+      <ul class="flex items-center justify-start px-4 py-3">
+        <!-- Пункт 1 -->
+        <li class="relative group submenu-group px-4 py-2">
+          <a href="#" class="text-gray-800 hover:text-green-800 font-medium transition-colors duration-200">
+            Главная
+          </a>
+        </li>
+
+        <!-- Пункт 2 с подменю -->
+        <li class="relative group submenu-group px-4 py-2">
+          <a href="#"
+            class="text-gray-800 hover:text-green-800 font-medium transition-colors duration-200 flex items-center">
+            Услуги
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+
+          <!-- Подменю 2 уровня -->
+          <div
+            class="submenu absolute left-0 top-full mt-1 w-48 bg-green-100/90 backdrop-blur-sm rounded-lg shadow-xl opacity-0 invisible transform translate-y-2 transition-all duration-300 z-10">
+            <ul class="py-2">
+              <li class="relative submenu-item px-4 py-2 hover:bg-green-200/80 transition-colors duration-200">
+                <a href="#" class="text-gray-800 hover:text-green-800 flex items-center justify-between">
+                  Веб-разработка
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+
+                <!-- Подменю 3 уровня -->
+                <div
+                  class="subsubmenu absolute left-full top-0 ml-1 w-48 bg-green-100/95 backdrop-blur-sm rounded-lg shadow-xl opacity-0 invisible transform -translate-x-2 transition-all duration-300 z-20">
+                  <ul class="py-2">
+                    <li class="px-4 py-2 hover:bg-green-200/80 transition-colors duration-200">
+                      <a href="#" class="text-gray-800 hover:text-green-800">Сайты-визитки</a>
+                    </li>
+                    <li class="px-4 py-2 hover:bg-green-200/80 transition-colors duration-200">
+                      <a href="#" class="text-gray-800 hover:text-green-800">Интернет-магазины</a>
+                    </li>
+                    <li class="px-4 py-2 hover:bg-green-200/80 transition-colors duration-200">
+                      <a href="#" class="text-gray-800 hover:text-green-800">Корпоративные сайты</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="px-4 py-2 hover:bg-green-200/80 transition-colors duration-200">
+                <a href="#" class="text-gray-800 hover:text-green-800">Дизайн</a>
+              </li>
+
+              <li class="relative submenu-item px-4 py-2 hover:bg-green-200/80 transition-colors duration-200">
+                <a href="#" class="text-gray-800 hover:text-green-800 flex items-center justify-between">
+                  SEO
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+
+                <!-- Подменю 3 уровня -->
+                <div
+                  class="subsubmenu absolute left-full top-0 ml-1 w-48 bg-green-100/95 backdrop-blur-sm rounded-lg shadow-xl opacity-0 invisible transform -translate-x-2 transition-all duration-300 z-20">
+                  <ul class="py-2">
+                    <li class="px-4 py-2 hover:bg-green-200/80 transition-colors duration-200">
+                      <a href="#" class="text-gray-800 hover:text-green-800">Аудит сайта</a>
+                    </li>
+                    <li class="px-4 py-2 hover:bg-green-200/80 transition-colors duration-200">
+                      <a href="#" class="text-gray-800 hover:text-green-800">Продвижение</a>
+                    </li>
+                    <li class="px-4 py-2 hover:bg-green-200/80 transition-colors duration-200">
+                      <a href="#" class="text-gray-800 hover:text-green-800">Аналитика</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Пункт 3 с подменю -->
+        <li class="relative group submenu-group px-4 py-2">
+          <a href="#"
+            class="text-gray-800 hover:text-green-800 font-medium transition-colors duration-200 flex items-center">
+            О компании
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </a>
+
+          <!-- Подменю 2 уровня -->
+          <div
+            class="submenu absolute left-0 top-full mt-1 w-48 bg-green-100/90 backdrop-blur-sm rounded-lg shadow-xl opacity-0 invisible transform translate-y-2 transition-all duration-300 z-10">
+            <ul class="py-2">
+              <li class="px-4 py-2 hover:bg-green-200/80 transition-colors duration-200">
+                <a href="#" class="text-gray-800 hover:text-green-800">История</a>
+              </li>
+              <li class="px-4 py-2 hover:bg-green-200/80 transition-colors duration-200">
+                <a href="#" class="text-gray-800 hover:text-green-800">Команда</a>
+              </li>
+              <li class="px-4 py-2 hover:bg-green-200/80 transition-colors duration-200">
+                <a href="#" class="text-gray-800 hover:text-green-800">Вакансии</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Пункт 4 -->
+        <li class="relative group submenu-group px-4 py-2">
+          <a href="#" class="text-gray-800 hover:text-green-800 font-medium transition-colors duration-200">
+            Контакты
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Мобильное меню -->
+    <div class="md:hidden">
+      <div class="flex items-center justify-between bg-green-100/70 backdrop-blur-sm rounded-xl shadow-lg px-4 py-3">
+        <div class="text-lg font-semibold text-gray-800">Меню</div>
+        <button id="mobile-menu-button" class="text-gray-800 hover:text-green-800">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div id="mobile-menu" class="mobile-menu bg-green-100/70 backdrop-blur-sm rounded-xl shadow-lg mt-2">
+        <ul class="py-2">
+          <li class="border-b border-green-200/50">
+            <a href="#"
+              class="block px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200">
+              Главная
+            </a>
+          </li>
+
+          <li class="border-b border-green-200/50">
+            <details class="group">
+              <summary
+                class="flex items-center justify-between px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200 cursor-pointer">
+                Услуги
+                <svg class="w-4 h-4 transform group-open:rotate-180 transition-transform" fill="none"
+                  stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <ul class="bg-green-100/80 ml-4">
+                <li class="border-b border-green-200/50">
+                  <details class="group">
+                    <summary
+                      class="flex items-center justify-between px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200 cursor-pointer">
+                      Веб-разработка
+                      <svg class="w-4 h-4 transform group-open:rotate-90 transition-transform" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
+                    </summary>
+                    <ul class="bg-green-100/90 ml-4">
+                      <li>
+                        <a href="#"
+                          class="block px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200">
+                          Сайты-визитки
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          class="block px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200">
+                          Интернет-магазины
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          class="block px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200">
+                          Корпоративные сайты
+                        </a>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+                <li>
+                  <a href="#"
+                    class="block px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200">
+                    Дизайн
+                  </a>
+                </li>
+                <li class="border-t border-green-200/50">
+                  <details class="group">
+                    <summary
+                      class="flex items-center justify-between px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200 cursor-pointer">
+                      SEO
+                      <svg class="w-4 h-4 transform group-open:rotate-90 transition-transform" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
+                    </summary>
+                    <ul class="bg-green-100/90 ml-4">
+                      <li>
+                        <a href="#"
+                          class="block px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200">
+                          Аудит сайта
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          class="block px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200">
+                          Продвижение
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#"
+                          class="block px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200">
+                          Аналитика
+                        </a>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </details>
+          </li>
+
+          <li class="border-b border-green-200/50">
+            <details class="group">
+              <summary
+                class="flex items-center justify-between px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200 cursor-pointer">
+                О компании
+                <svg class="w-4 h-4 transform group-open:rotate-180 transition-transform" fill="none"
+                  stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <ul class="bg-green-100/80 ml-4">
+                <li>
+                  <a href="#"
+                    class="block px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200">
+                    История
+                  </a>
+                </li>
+                <li>
+                  <a href="#"
+                    class="block px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200">
+                    Команда
+                  </a>
+                </li>
+                <li>
+                  <a href="#"
+                    class="block px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200">
+                    Вакансии
+                  </a>
+                </li>
+              </ul>
+            </details>
+          </li>
+
+          <li>
+            <a href="#"
+              class="block px-4 py-3 text-gray-800 hover:bg-green-200/80 hover:text-green-800 transition-colors duration-200">
+              Контакты
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    // Скрипт для мобильного меню
+    document.getElementById('mobile-menu-button').addEventListener('click', function () {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('active');
+
+      // Меняем иконку
+      const icon = this.querySelector('svg');
+      if (menu.classList.contains('active')) {
+        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+      } else {
+        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+      }
+    });
+
+    // Закрытие подменю при клике вне меню (опционально)
+    document.addEventListener('click', function (event) {
+      if (!event.target.closest('nav')) {
+        const openDetails = document.querySelectorAll('details[open]');
+        openDetails.forEach(detail => {
+          detail.removeAttribute('open');
+        });
+      }
+    });
+  </script>
 </body>
+
 </html>
