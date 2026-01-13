@@ -5,7 +5,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Григорьева Ольга - Недкижимость СПб (Купля\Продажа)</title>
-  <link href="/output.css" rel="stylesheet">
+  <link href="/public/output.css" rel="stylesheet">
+  <style>
+    /* Дополнительные стили для плавности */
+    .submenu-group:hover .submenu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .submenu-item:hover .subsubmenu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    /* Стили для мобильного меню */
+    @media (max-width: 768px) {
+      .mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+
+      .mobile-menu.active {
+        max-height: 500px;
+      }
+    }
+  </style>
 </head>
 
 <body class="bg-gray-50 min-h-screen p-4 md:p-6">
