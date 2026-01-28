@@ -1,0 +1,3915 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Выбираем район Санкт-Петербурга:</title>
+   <meta name="description" content="">
+   <meta name="keywords" content="">
+   <meta name="author" content="Григорьева Ольга">
+   <meta property="og:title" content="">
+   <meta property="og:description" content="">
+   <meta property="og:type" content="website">
+   <link href="../dist/output.css" rel="stylesheet">
+   <!-- Добавляем иконки FontAwesome -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <!-- Добавьте этот код в <head> -->
+   <script>
+      // Глобальные массивы данных
+      const districts = [
+         {
+            id: 'admiralteyskiy',
+            name: 'Адмиралтейский',
+            population: '157 тыс.',
+            area: '13.82 км²',
+            metro: ['Садовая', 'Сенная площадь', 'Технологический институт', 'Балтийская', 'Нарвская'],
+            description: 'Исторический центр города с множеством архитектурных памятников',
+            image: './image/interaktivnaya-karta-spb/Admiralteyskiy.png'
+         },
+         {
+            id: 'vasileostrovskiy',
+            name: 'Василеостровский',
+            population: '209 тыс.',
+            area: '21.47 км²',
+            metro: ['Василеостровская', 'Приморская', 'Спортивная'],
+            description: 'Островной район с развитой инфраструктурой и набережными',
+            image: './image/interaktivnaya-karta-spb/Vasileostrovskiy.png'
+         },
+         {
+            id: 'petrogradskiy',
+            name: 'Петроградский',
+            population: '135 тыс.',
+            area: '24 км²',
+            metro: ['Петроградская', 'Горьковская', 'Чкаловская', 'Крестовский остров', 'Спортивная'],
+            description: 'Престижный исторический район на островах',
+            image: './image/interaktivnaya-karta-spb/Petrogradskiy.png'
+         },
+         {
+            id: 'vyborgskiy',
+            name: 'Выборгский',
+            population: '511 тыс.',
+            area: '115.38 км²',
+            metro: ['Выборгская', 'Лесная', 'Площадь Мужества', 'Политехническая'],
+            description: 'Крупный район с промышленными предприятиями и жилыми массивами',
+            image: './image/interaktivnaya-karta-spb/Viborgskiy.png'
+         },
+         {
+            id: 'kalininskiy',
+            name: 'Калининский',
+            population: '535 тыс.',
+            area: '40.12 км²',
+            metro: ['Академическая', 'Гражданский проспект', 'Девяткино', 'Площадь Мужества', 'Политехническая'],
+            description: 'Самый густонаселенный район с развитой транспортной сетью',
+            image: './image/interaktivnaya-karta-spb/Kalininskiy.png'
+         },
+         {
+            id: 'kirovskiy',
+            name: 'Кировский',
+            population: '338 тыс.',
+            area: '48 км²',
+            metro: ['Кировский завод', 'Автово', 'Ленинский проспект', 'Проспект Ветеранов', 'Нарвская'],
+            description: 'Промышленный район с историческими кварталами',
+            image: './image/interaktivnaya-karta-spb/Kirovskiy.png'
+         },
+         {
+            id: 'moskovskiy',
+            name: 'Московский',
+            population: '337 тыс.',
+            area: '71.07 км²',
+            metro: ['Московские ворота', 'Электросила', 'Парк Победы', 'Московская', 'Звездная', 'Купчино'],
+            description: 'Район с хорошо развитой инфраструктурой',
+            image: './image/interaktivnaya-karta-spb/Moskovskiy.png'
+         },
+         {
+            id: 'nevskiy',
+            name: 'Невский',
+            population: '538 тыс.',
+            area: '61.79 км²',
+            metro: ['Елизаровская', 'Ломоносовская', 'Пролетарская', 'Обухово', 'Рыбацкое', 'Улица Дыбенко'],
+            description: 'Крупнейший район по численности населения',
+            image: './image/interaktivnaya-karta-spb/Nevskiy.png'
+         },
+         {
+            id: 'frunzenskiy',
+            name: 'Фрунзенский',
+            population: '401 тыс.',
+            area: '37.5 км²',
+            metro: ['Международная', 'Бухарестская', 'Волковская', 'Обводный канал'],
+            description: 'Плотно заселенный район с хорошей транспортной доступностью',
+            image: './image/interaktivnaya-karta-spb/Frunzenskiy.png'
+         },
+         {
+            id: 'primorskiy',
+            name: 'Приморский',
+            population: '568 тыс.',
+            area: '109.87 км²',
+            metro: ['Старая Деревня', 'Крестовский остров', 'Чкаловская', 'Беговая', 'Комендантский проспект'],
+            description: 'Современный район с новостройками у Финского залива',
+            image: './image/interaktivnaya-karta-spb/Primorskiy.png'
+         },
+         {
+            id: 'krasnogvardeiskiy',
+            name: 'Красногвардейский',
+            population: '369 тыс.',
+            area: '56.8 км²',
+            metro: ['Ладожская', 'Новочеркасская'],
+            description: 'Молодой район с современной застройкой',
+            image: './image/interaktivnaya-karta-spb/Krasnogvardeiskiy.png'
+         },
+         {
+            id: 'krasnoselskiy',
+            name: 'Красносельский',
+            population: '395 тыс.',
+            area: '115 км²',
+            metro: ['Проспект Ветеранов', 'Ленинский проспект'],
+            description: 'Самый быстрорастущий район с новостройками',
+            image: './image/interaktivnaya-karta-spb/Krasnoselskiy.png'
+         },
+         {
+            id: 'kolpinskiy',
+            name: 'Колпинский',
+            population: '187 тыс.',
+            area: '105.8 км²',
+            metro: [],
+            description: 'Отдаленный район с собственным историческим центром',
+            image: './image/interaktivnaya-karta-spb/Kolpinskiy.png'
+         },
+         {
+            id: 'pushkinskiy',
+            name: 'Пушкинский',
+            population: '189 тыс.',
+            area: '239.95 км²',
+            metro: [],
+            description: 'Район с императорскими резиденциями и парками',
+            image: './image/interaktivnaya-karta-spb/Pyshkinskiy.png'
+         },
+         {
+            id: 'kurortnyy',
+            name: 'Курортный',
+            population: '78 тыс.',
+            area: '267.91 км²',
+            metro: [],
+            description: 'Приморский курортный район с пляжами и санаториями',
+            image: './image/interaktivnaya-karta-spb/Kurortniy.png'
+         },
+         {
+            id: 'petrodvortsovyy',
+            name: 'Петродворцовый',
+            population: '135 тыс.',
+            area: '107.4 км²',
+            metro: [],
+            description: 'Район с дворцово-парковыми ансамблями',
+            image: './image/interaktivnaya-karta-spb/Petrodvorcoviy.png'
+         },
+         {
+            id: 'kronshtadtskiy',
+            name: 'Кронштадтский',
+            population: '44 тыс.',
+            area: '19.35 км²',
+            metro: [],
+            description: 'Островной район-порт с богатой историей',
+            image: './image/interaktivnaya-karta-spb/Kronshtadtskiy.png'
+         },
+         {
+            id: 'tsentralnyy',
+            name: 'Центральный',
+            population: '214 тыс.',
+            area: '17.12 км²',
+            metro: ['Владимирская', 'Достоевская', 'Лиговский проспект', 'Маяковская', 'Площадь Восстания', 'Чернышевская'],
+            description: 'Деловой и культурный центр города',
+            image: './image/interaktivnaya-karta-spb/Uentralniy.png'
+         }
+      ];
+
+      const districtRatings = {
+         'admiralteyskiy': { price: 9, ecology: 6, infrastructure: 8, transport: 9, education: 8, medicine: 7, age: 3, safety: 7, employment: 8, traffic: 8 },
+         'vasileostrovskiy': { price: 7, ecology: 7, infrastructure: 7, transport: 8, education: 7, medicine: 6, age: 4, safety: 7, employment: 6, traffic: 7 },
+         'petrogradskiy': { price: 8, ecology: 7, infrastructure: 8, transport: 8, education: 8, medicine: 7, age: 4, safety: 8, employment: 7, traffic: 7 },
+         'vyborgskiy': { price: 5, ecology: 5, infrastructure: 6, transport: 7, education: 6, medicine: 5, age: 5, safety: 6, employment: 6, traffic: 6 },
+         'kalininskiy': { price: 4, ecology: 4, infrastructure: 7, transport: 8, education: 7, medicine: 6, age: 6, safety: 6, employment: 7, traffic: 7 },
+         'kirovskiy': { price: 3, ecology: 3, infrastructure: 6, transport: 7, education: 5, medicine: 5, age: 5, safety: 5, employment: 5, traffic: 6 },
+         'moskovskiy': { price: 5, ecology: 5, infrastructure: 8, transport: 9, education: 7, medicine: 7, age: 6, safety: 7, employment: 7, traffic: 8 },
+         'nevskiy': { price: 4, ecology: 4, infrastructure: 8, transport: 9, education: 7, medicine: 6, age: 5, safety: 6, employment: 7, traffic: 8 },
+         'frunzenskiy': { price: 5, ecology: 5, infrastructure: 7, transport: 8, education: 6, medicine: 6, age: 6, safety: 7, employment: 6, traffic: 7 },
+         'primorskiy': { price: 7, ecology: 8, infrastructure: 8, transport: 7, education: 7, medicine: 7, age: 8, safety: 8, employment: 7, traffic: 6 },
+         'krasnogvardeiskiy': { price: 4, ecology: 5, infrastructure: 7, transport: 7, education: 6, medicine: 5, age: 7, safety: 6, employment: 6, traffic: 6 },
+         'krasnoselskiy': { price: 6, ecology: 7, infrastructure: 7, transport: 6, education: 6, medicine: 6, age: 8, safety: 7, employment: 6, traffic: 5 },
+         'kolpinskiy': { price: 2, ecology: 6, infrastructure: 5, transport: 4, education: 5, medicine: 4, age: 5, safety: 6, employment: 4, traffic: 4 },
+         'pushkinskiy': { price: 6, ecology: 9, infrastructure: 6, transport: 5, education: 6, medicine: 5, age: 5, safety: 8, employment: 5, traffic: 4 },
+         'kurortnyy': { price: 5, ecology: 9, infrastructure: 5, transport: 3, education: 4, medicine: 4, age: 5, safety: 8, employment: 3, traffic: 3 },
+         'petrodvortsovyy': { price: 6, ecology: 8, infrastructure: 5, transport: 4, education: 5, medicine: 4, age: 4, safety: 8, employment: 4, traffic: 4 },
+         'kronshtadtskiy': { price: 3, ecology: 8, infrastructure: 4, transport: 3, education: 4, medicine: 4, age: 4, safety: 7, employment: 4, traffic: 3 },
+         'tsentralnyy': { price: 9, ecology: 6, infrastructure: 9, transport: 9, education: 9, medicine: 8, age: 3, safety: 7, employment: 9, traffic: 9 }
+      };
+   </script>
+   <style>
+      .menu-transition {
+         transition: all 0.2s ease;
+      }
+
+      /* Скрываем все подменю по умолчанию */
+      .sub-menu-1,
+      .sub-menu-2,
+      .sub-menu-3 {
+         opacity: 0;
+         visibility: hidden;
+         pointer-events: none;
+      }
+
+      /* Показываем подменю при наведении */
+      .group:hover>.sub-menu-1 {
+         opacity: 1;
+         visibility: visible;
+         pointer-events: auto;
+         transform: translateY(0);
+      }
+
+      .sub-menu-1 .group:hover>.sub-menu-2 {
+         opacity: 1;
+         visibility: visible;
+         pointer-events: auto;
+         transform: translateX(0);
+      }
+
+      .sub-menu-2 .group:hover>.sub-menu-3 {
+         opacity: 1;
+         visibility: visible;
+         pointer-events: auto;
+         transform: translateX(0);
+      }
+
+      /* Изначальные позиции для анимации */
+      .sub-menu-1 {
+         transform: translateY(-10px);
+      }
+
+      .sub-menu-2,
+      .sub-menu-3 {
+         transform: translateX(-10px);
+      }
+
+      /* Анимация появления */
+      @keyframes fadeInUp {
+         from {
+            opacity: 0;
+            transform: translateY(30px);
+         }
+
+         to {
+            opacity: 1;
+            transform: translateY(0);
+         }
+      }
+
+      .animate-fade-in-up {
+         animation: fadeInUp 0.6s ease-out forwards;
+      }
+
+      /* Декоративные фигуры */
+      .shape {
+         position: absolute;
+         opacity: 0.15;
+         z-index: 1;
+      }
+
+      .triangle {
+         width: 0;
+         height: 0;
+         border-left: 175px solid transparent;
+         border-right: 175px solid transparent;
+         border-bottom: 350px solid #ef4444;
+      }
+
+      .circle {
+         width: 350px;
+         height: 350px;
+         border-radius: 50%;
+         background-color: #ef4444;
+      }
+
+      .square {
+         width: 350px;
+         height: 350px;
+         background-color: #ef4444;
+      }
+
+      /* Стили для секций с чередованием */
+      .section-black {
+         background-color: #1f2937;
+         color: white;
+      }
+
+      .section-light-blue {
+         background-color: #dbeafe;
+         color: #1f2937;
+      }
+
+      /* Градиент для текста */
+      .gradient-text {
+         background: linear-gradient(90deg, #3b82f6, #60a5fa);
+         -webkit-background-clip: text;
+         -webkit-text-fill-color: transparent;
+         background-clip: text;
+      }
+
+      /* Стили для бургер-меню */
+      .burger-menu {
+         display: none;
+         flex-direction: column;
+         cursor: pointer;
+         padding: 10px;
+         z-index: 100;
+      }
+
+      .burger-line {
+         width: 25px;
+         height: 3px;
+         background-color: #1f2937;
+         margin: 3px 0;
+         transition: 0.4s;
+      }
+
+      .burger-menu.active .burger-line:nth-child(1) {
+         transform: rotate(-45deg) translate(-5px, 6px);
+      }
+
+      .burger-menu.active .burger-line:nth-child(2) {
+         opacity: 0;
+      }
+
+      .burger-menu.active .burger-line:nth-child(3) {
+         transform: rotate(45deg) translate(-5px, -6px);
+      }
+
+      /* Скрытие меню на мобильных */
+      @media (max-width: 1024px) {
+         .desktop-menu {
+            display: none;
+         }
+
+         .burger-menu {
+            display: flex;
+         }
+
+         .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background-color: #dbeafe;
+            z-index: 90;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            padding: 80px 20px 20px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+         }
+
+         .mobile-menu.active {
+            right: 0;
+         }
+
+         .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 80;
+         }
+
+         .mobile-menu-overlay.active {
+            display: block;
+         }
+
+         .mobile-menu ul {
+            flex-direction: column;
+            width: 100%;
+         }
+
+         .mobile-menu li {
+            width: 100%;
+         }
+
+         .mobile-menu a {
+            padding: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+         }
+
+         .mobile-menu .sub-menu-1,
+         .mobile-menu .sub-menu-2,
+         .mobile-menu .sub-menu-3 {
+            position: static;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: none;
+            display: none;
+            margin-left: 20px;
+            box-shadow: none;
+            background-color: rgba(255, 255, 255, 0.5);
+            width: auto;
+         }
+
+         .mobile-menu .sub-menu-open {
+            display: block;
+         }
+
+         .mobile-menu .sub-menu-1 {
+            margin-left: 0;
+         }
+      }
+
+      @media (min-width: 1025px) {
+         .mobile-menu {
+            display: none;
+         }
+      }
+
+      /* Стили для контента с нормальным выравниванием */
+      .content-container {
+         max-width: 1200px;
+         margin: 0 auto;
+      }
+
+
+      /* Анимация появления карты */
+      @keyframes fadeIn {
+         from {
+            opacity: 0;
+         }
+
+         to {
+            opacity: 1;
+         }
+      }
+
+      .district-map {
+         animation: fadeIn 0.3s ease-out;
+      }
+
+      /* Адаптивные стили для карты */
+      @media (max-width: 640px) {
+         #district-main-map {
+            min-height: 350px !important;
+         }
+
+         .district-list-item {
+            padding: 10px 12px;
+         }
+
+         .district-card {
+            padding: 14px;
+         }
+      }
+
+      @media (max-width: 768px) {
+         #district-main-map {
+            min-height: 400px !important;
+         }
+      }
+
+      @media (min-width: 769px) and (max-width: 1023px) {
+         #district-main-map {
+            min-height: 500px !important;
+         }
+      }
+
+      @media (min-width: 1024px) {
+         #district-main-map {
+            min-height: 600px !important;
+         }
+      }
+
+      /* Плавные переходы */
+      .transition-opacity {
+         transition-property: opacity;
+         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .duration-500 {
+         transition-duration: 500ms;
+      }
+
+      /* Стили для индикатора загрузки */
+      #map-loading {
+         z-index: 10;
+      }
+
+      /* Улучшаем touch-интерфейс для мобильных */
+      @media (hover: none) and (pointer: coarse) {
+
+         .district-list-item:active,
+         .district-card:active {
+            transform: scale(0.98);
+            transition: transform 0.1s;
+         }
+      }
+
+      /* Заглушка для отсутствующих изображений */
+      .district-map:before {
+         content: '';
+         position: absolute;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         background: linear-gradient(135deg, #f0f0f0 25%, #e0e0e0 25%, #e0e0e0 50%, #f0f0f0 50%, #f0f0f0 75%, #e0e0e0 75%, #e0e0e0);
+         background-size: 20px 20px;
+         opacity: 0.3;
+      }
+
+      .district-map:after {
+         content: 'Карта района';
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         color: #999;
+         font-size: 14px;
+         font-weight: bold;
+      }
+
+      /* Стили для фильтров */
+      .filter-select {
+         background-color: white;
+         cursor: pointer;
+      }
+
+      .filter-select:hover {
+         border-color: #3b82f6;
+      }
+
+      /* Стили для результатов фильтрации */
+      .district-result-item:hover {
+         transform: translateY(-2px);
+         box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+      }
+
+      /* Адаптивные стили для фильтров */
+      @media (max-width: 768px) {
+         .grid-cols-5 {
+            grid-template-columns: repeat(2, 1fr);
+         }
+      }
+
+      @media (max-width: 640px) {
+         .grid-cols-5 {
+            grid-template-columns: 1fr;
+         }
+      }
+
+      /* Анимация появления результатов */
+      @keyframes slideIn {
+         from {
+            opacity: 0;
+            transform: translateY(-10px);
+         }
+
+         to {
+            opacity: 1;
+            transform: translateY(0);
+         }
+      }
+
+      #filter-results {
+         animation: slideIn 0.3s ease-out;
+      }
+
+      /* Анимации для фильтров */
+      @keyframes fadeIn {
+         from {
+            opacity: 0;
+            transform: translateY(-10px);
+         }
+
+         to {
+            opacity: 1;
+            transform: translateY(0);
+         }
+      }
+
+      @keyframes fadeInUp {
+         from {
+            opacity: 0;
+            transform: translateY(20px);
+         }
+
+         to {
+            opacity: 1;
+            transform: translateY(0);
+         }
+      }
+
+      .animate-fade-in {
+         animation: fadeIn 0.3s ease-out;
+      }
+
+      .animate-fade-in-up {
+         animation: fadeInUp 0.3s ease-out;
+      }
+
+      /* Стили для фильтров */
+      .filter-select {
+         transition: all 0.2s ease;
+      }
+
+      .filter-select:focus {
+         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      /* Стили для результатов */
+      .filtered-district-item {
+         transition: all 0.2s ease;
+      }
+
+      .filtered-district-item:hover {
+         transform: translateX(2px);
+      }
+
+      /* Адаптивность */
+      @media (max-width: 768px) {
+         .lg\\:grid-cols-5 {
+            grid-template-columns: repeat(2, 1fr);
+         }
+      }
+
+      @media (max-width: 640px) {
+         .lg\\:grid-cols-5 {
+            grid-template-columns: 1fr;
+         }
+      }
+
+
+      /* Основные светлые цвета для мобильной версии */
+      @media (max-width: 768px) {
+
+         /* Основной фон - светлый */
+         body {
+            background-color: #ffffff !important;
+         }
+
+         .section-light-blue {
+            background-color: #f8fafc !important;
+         }
+
+         .section-black {
+            background-color: #f1f5f9 !important;
+            color: #1f2937 !important;
+         }
+
+         .section-black h2,
+         .section-black h3,
+         .section-black p {
+            color: #1f2937 !important;
+         }
+
+         /* Карточки районов */
+         .district-card {
+            background-color: #ffffff !important;
+            border-color: #e2e8f0 !important;
+            color: #1f2937 !important;
+         }
+
+         .district-card h3 {
+            color: #1f2937 !important;
+         }
+
+         .district-card .text-gray-400 {
+            color: #64748b !important;
+         }
+
+         /* Карточки в результатах фильтрации */
+         .filtered-district-item {
+            background-color: #ffffff !important;
+            border-color: #e2e8f0 !important;
+         }
+
+         .filtered-district-item h4 {
+            color: #1f2937 !important;
+         }
+
+         .filtered-district-item .text-gray-600 {
+            color: #64748b !important;
+         }
+
+         .filtered-district-item p.text-gray-600 {
+            color: #475569 !important;
+         }
+
+         /* Контейнер результатов */
+         #filter-results-container {
+            background: linear-gradient(to right, #f0f9ff, #e0f2fe) !important;
+            border-color: #bae6fd !important;
+         }
+
+         #filter-results-container h3 {
+            color: #1f2937 !important;
+         }
+
+         /* Активные фильтры */
+         .mb-4.p-3.bg-blue-50.rounded-lg {
+            background-color: #f0f9ff !important;
+         }
+
+         .mb-4.p-3.bg-blue-50.rounded-lg .text-blue-800 {
+            color: #0369a1 !important;
+         }
+
+         /* Бейджи */
+         .inline-flex.items-center.bg-green-100 {
+            background-color: #dcfce7 !important;
+            color: #166534 !important;
+         }
+
+         .inline-flex.items-center.bg-yellow-100 {
+            background-color: #fef9c3 !important;
+            color: #854d0e !important;
+         }
+
+         .inline-flex.items-center.bg-blue-100 {
+            background-color: #dbeafe !important;
+            color: #1e40af !important;
+         }
+
+         /* Список районов */
+         .district-list-item {
+            background-color: #ffffff !important;
+            border-color: #e2e8f0 !important;
+         }
+
+         .district-list-item .text-gray-800 {
+            color: #1f2937 !important;
+         }
+
+         .district-list-item .text-gray-600 {
+            color: #64748b !important;
+         }
+
+         /* Ховер эффекты */
+         .district-list-item:hover {
+            background-color: #f8fafc !important;
+            border-color: #3b82f6 !important;
+         }
+
+         .filtered-district-item:hover {
+            background-color: #f8fafc !important;
+            border-color: #3b82f6 !important;
+         }
+
+         /* Контейнер фильтров */
+         .mb-8.p-6.bg-white {
+            background-color: #ffffff !important;
+         }
+
+         .mb-8.p-6.bg-white h3 {
+            color: #1f2937 !important;
+         }
+
+         .mb-8.p-6.bg-white p {
+            color: #4b5563 !important;
+         }
+
+         /* Селекты фильтров */
+         .filter-select {
+            background-color: #ffffff !important;
+            border-color: #d1d5db !important;
+            color: #1f2937 !important;
+         }
+
+         .filter-select:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+         }
+
+         /* Кнопки */
+         #reset-filters-btn {
+            background-color: #f1f5f9 !important;
+            color: #475569 !important;
+            border-color: #cbd5e1 !important;
+         }
+
+         #reset-filters-btn:hover {
+            background-color: #e2e8f0 !important;
+         }
+
+         /* Счетчик */
+         #filter-results-count {
+            color: #1d4ed8 !important;
+         }
+
+         /* Легенда на карте */
+         .absolute.bottom-4.left-4 {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(8px);
+         }
+
+         .absolute.bottom-4.left-4 span {
+            color: #1f2937 !important;
+         }
+
+         /* Мобильная легенда */
+         .md\\:hidden.mt-4.bg-blue-50 {
+            background-color: #f0f9ff !important;
+         }
+
+         .md\\:hidden.mt-4.bg-blue-50 span {
+            color: #1e40af !important;
+         }
+
+         /* Статистика */
+         .bg-blue-50.p-3 {
+            background-color: #f0f9ff !important;
+         }
+
+         .text-blue-700 {
+            color: #1d4ed8 !important;
+         }
+
+         .text-blue-800 {
+            color: #1e40af !important;
+         }
+
+         /* Текст "Наведите для просмотра" */
+         .text-blue-600 {
+            color: #2563eb !important;
+         }
+      }
+
+      /* Исправление кнопки "Наведите для просмотра" */
+      @media (hover: none) and (pointer: coarse) {
+
+         /* На мобильных меняем текст на "Коснитесь для просмотра" */
+         .filtered-district-item .text-blue-600 {
+            display: none !important;
+         }
+
+         .filtered-district-item .text-blue-600::after {
+            content: "Коснитесь для просмотра" !important;
+            display: block !important;
+            color: #2563eb !important;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 12px;
+            background-color: #eff6ff;
+            border-radius: 6px;
+            margin-top: 8px;
+            text-align: center;
+            border: 1px solid #dbeafe;
+         }
+
+         /* Добавляем визуальную подсказку для клика */
+         .filtered-district-item {
+            position: relative;
+         }
+
+         .filtered-district-item::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            border-radius: 8px;
+            box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+            transition: box-shadow 0.3s;
+         }
+
+         .filtered-district-item:active::after {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+         }
+      }
+
+      /* Улучшение видимости на мобильных */
+      @media (max-width: 768px) {
+
+         /* Делаем текст "Коснитесь для просмотра" более заметным */
+         .filtered-district-item .text-blue-600 {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white !important;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 8px;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+         }
+
+         .filtered-district-item .text-blue-600 i {
+            font-size: 10px;
+         }
+
+         /* Добавляем иконку пальца для тач-устройств */
+         .filtered-district-item .fa-eye::before {
+            content: "\f8b6";
+            /* Иконка указательного пальца в FontAwesome */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            margin-right: 4px;
+         }
+
+         /* Увеличиваем отступ для лучшей читаемости */
+         .filtered-district-item .mt-3 {
+            margin-top: 16px !important;
+            padding-top: 12px;
+            border-top: 1px solid #e2e8f0;
+         }
+      }
+
+      /* Специальные стили для очень маленьких экранов */
+      @media (max-width: 480px) {
+
+         /* Делаем подсказку еще заметнее */
+         .filtered-district-item .text-blue-600 {
+            padding: 8px 16px;
+            font-size: 13px;
+            width: 100%;
+            justify-content: center;
+            margin-top: 12px;
+         }
+
+         /* Добавляем пульсирующую анимацию для привлечения внимания */
+         @keyframes pulseMobile {
+            0% {
+               opacity: 1;
+               transform: scale(1);
+            }
+
+            50% {
+               opacity: 0.8;
+               transform: scale(1.02);
+            }
+
+            100% {
+               opacity: 1;
+               transform: scale(1);
+            }
+         }
+
+         .filtered-district-item .text-blue-600 {
+            animation: pulseMobile 2s infinite;
+         }
+
+         /* Убираем анимацию при нажатии */
+         .filtered-district-item:active .text-blue-600 {
+            animation: none;
+            transform: scale(0.98);
+            transition: transform 0.1s;
+         }
+      }
+
+      /* Для десктопа оставляем оригинальный текст */
+      @media (min-width: 769px) {
+         .filtered-district-item .text-blue-600 i.fa-eye::before {
+            content: "\f06e";
+            /* Возвращаем иконку глаза */
+         }
+      }
+
+      /* Исправление цветов в темной теме для мобильных */
+      @media (prefers-color-scheme: dark) {
+         @media (max-width: 768px) {
+
+            /* Переопределяем для темной темы, но сохраняем светлый дизайн */
+            body {
+               background-color: #0f172a !important;
+               color: #f1f5f9 !important;
+            }
+
+            .section-light-blue {
+               background-color: #1e293b !important;
+            }
+
+            .section-black {
+               background-color: #0f172a !important;
+               color: #f1f5f9 !important;
+            }
+
+            .district-card {
+               background-color: #1e293b !important;
+               border-color: #334155 !important;
+               color: #f1f5f9 !important;
+            }
+
+            .filtered-district-item {
+               background-color: #1e293b !important;
+               border-color: #334155 !important;
+               color: #f1f5f9 !important;
+            }
+
+            /* Остальные стили для темной темы сохраняем светлыми */
+            #filter-results-container {
+               background: linear-gradient(to right, #1e3a8a, #1e40af) !important;
+               border-color: #3b82f6 !important;
+            }
+
+            .text-blue-600 {
+               background: linear-gradient(135deg, #60a5fa, #3b82f6) !important;
+               color: white !important;
+            }
+         }
+      }
+
+      /* Дополнительные улучшения для удобства на мобильных */
+      @media (max-width: 768px) {
+
+         /* Увеличиваем контрастность текста */
+         .text-gray-800 {
+            color: #1f2937 !important;
+            font-weight: 600 !important;
+         }
+
+         .text-gray-600 {
+            color: #4b5563 !important;
+         }
+
+         /* Делаем заголовки более заметными */
+         h1,
+         h2,
+         h3 {
+            color: #111827 !important;
+         }
+
+         /* Улучшаем видимость разделителей */
+         .border-gray-200 {
+            border-color: #e5e7eb !important;
+         }
+
+         /* Делаем тени более мягкими */
+         .shadow-lg {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+         }
+
+         .shadow-md {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+         }
+
+         /* Улучшаем видимость активных элементов */
+         .district-list-item.active,
+         .filtered-district-item.active {
+            background-color: #eff6ff !important;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+         }
+      }
+
+      /* Исправление для старых браузеров */
+      @media (max-width: 768px) {
+
+         /* Обеспечиваем обратную совместимость */
+         .filtered-district-item .text-blue-600 span {
+            display: inline-block !important;
+         }
+
+         /* Фолбэк для браузеров без поддержки backdrop-filter */
+         @supports not (backdrop-filter: blur(8px)) {
+            .absolute.bottom-4.left-4 {
+               background-color: rgba(255, 255, 255, 0.98) !important;
+            }
+         }
+      }
+   </style>
+</head>
+
+<body>
+   <!-- Шапка сайта -->
+   <header class="sticky top-0 z-50 shadow-lg">
+      <div class="bg-white py-3">
+         <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+               <div class="mb-4 md:mb-0">
+                  <h1 class="text-2xl font-bold gradient-text">Григорьева Ольга</h1>
+                  <p class="text-gray-600">Профессиональный риелтор</p>
+               </div>
+               <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
+                  <div class="flex items-center">
+                     <i class="fas fa-phone text-blue-600 mr-2"></i>
+                     <a href="tel:+79991234567" class="font-medium hover:text-blue-700">+7 (999) 123-45-67</a>
+                  </div>
+                  <div class="flex items-center">
+                     <i class="fas fa-envelope text-blue-600 mr-2"></i>
+                     <a href="mailto:olga@example.com" class="font-medium hover:text-blue-700">olga@example.com</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Навигационное меню для десктопа -->
+      <nav class="bg-blue-100 desktop-menu">
+         <div class="container mx-auto px-4">
+            <ul class="flex flex-col md:flex-row p-3 space-y-1 md:space-y-0 md:space-x-1 list-none">
+
+               <!-- Главная страница -->
+               <li class="group relative">
+                  <a href="./index.html"
+                     class="flex items-center px-5 py-3 rounded-lg text-gray-800 hover:bg-blue-200 menu-transition font-medium">
+                     Главная страница
+                  </a>
+               </li>
+
+               <!-- Что вы хотите? (Уровень 1) -->
+               <li class="group relative">
+                  <a href="#services"
+                     class="flex items-center justify-between px-5 py-3 rounded-lg text-gray-800 hover:bg-blue-200 menu-transition font-medium">
+                     Что вы хотите?
+                     <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 menu-transition" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                     </svg>
+                  </a>
+
+                  <!-- Подменю 2 уровня -->
+                  <ul
+                     class="sub-menu-1 absolute left-0 top-full mt-1 w-72 bg-blue-100 rounded-lg shadow-lg z-10 menu-transition border border-blue-200">
+
+                     <!-- Купить квартиру (Уровень 2) -->
+                     <li class="group relative">
+                        <a href="#buy-apartment"
+                           class="flex items-center justify-between px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-t-lg border-b border-blue-200">
+                           Купить квартиру
+                           <svg class="w-4 h-4 transform group-hover:rotate-90 menu-transition" fill="none"
+                              stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                              </path>
+                           </svg>
+                        </a>
+
+                        <!-- Подменю 3 уровня -->
+                        <ul
+                           class="sub-menu-2 absolute left-full top-0 ml-1 w-72 bg-blue-100 rounded-lg shadow-lg z-20 menu-transition border border-blue-200">
+                           <!-- Вторичный рынок (Уровень 3) -->
+                           <li class="group relative">
+                              <a href="#secondary-market"
+                                 class="flex items-center justify-between px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-t-lg border-b border-blue-200">
+                                 Вторичный рынок
+                                 <svg class="w-4 h-4 transform group-hover:rotate-90 menu-transition" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                       d="M9 5l7 7-7 7"></path>
+                                 </svg>
+                              </a>
+
+                              <!-- Внутренний список для вторичного рынка (Уровень 4) -->
+                              <ul
+                                 class="sub-menu-3 absolute left-full top-0 ml-1 w-64 bg-blue-100 rounded-lg shadow-lg z-30 menu-transition border border-blue-200 p-2">
+                                 <li><a href="#studios"
+                                       class="block px-3 py-2 text-sm text-gray-800 hover:bg-blue-200 menu-transition rounded">Студии</a>
+                                 </li>
+                                 <li><a href="#one-room"
+                                       class="block px-3 py-2 text-sm text-gray-800 hover:bg-blue-200 menu-transition rounded">Однокомнатные
+                                       кв-ры</a></li>
+                                 <li><a href="#two-room"
+                                       class="block px-3 py-2 text-sm text-gray-800 hover:bg-blue-200 menu-transition rounded">Двухкомнатные
+                                       кв-ры</a></li>
+                                 <li><a href="#three-room"
+                                       class="block px-3 py-2 text-sm text-gray-800 hover:bg-blue-200 menu-transition rounded">Трёхкомнатные
+                                       кв-ры</a></li>
+                                 <li><a href="#four-room"
+                                       class="block px-3 py-2 text-sm text-gray-800 hover:bg-blue-200 menu-transition rounded">Четырехкомн.
+                                       кв-ры</a></li>
+                              </ul>
+                           </li>
+
+                           <!-- Первичный рынок (Уровень 3) -->
+                           <li class="group relative">
+                              <a href="#primary-market"
+                                 class="flex items-center justify-between px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition border-b border-blue-200">
+                                 Первичный рынок
+                                 <svg class="w-4 h-4 transform group-hover:rotate-90 menu-transition" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                       d="M9 5l7 7-7 7"></path>
+                                 </svg>
+                              </a>
+
+                              <!-- Внутренний список для первичного рынка (Уровень 4) -->
+                              <ul
+                                 class="sub-menu-3 absolute left-full top-0 ml-1 w-72 bg-blue-100 rounded-lg shadow-lg z-30 menu-transition border border-blue-200 p-2">
+                                 <li><a href="#new-studios"
+                                       class="block px-3 py-2 text-sm text-gray-800 hover:bg-blue-200 menu-transition rounded">Студии</a>
+                                 </li>
+                                 <li><a href="#new-one-room"
+                                       class="block px-3 py-2 text-sm text-gray-800 hover:bg-blue-200 menu-transition rounded">Однокомнатные</a>
+                                 </li>
+                                 <li><a href="#new-two-room"
+                                       class="block px-3 py-2 text-sm text-gray-800 hover:bg-blue-200 menu-transition rounded">Двухкомнатные</a>
+                                 </li>
+                                 <li><a href="#new-three-room"
+                                       class="block px-3 py-2 text-sm text-gray-800 hover:bg-blue-200 menu-transition rounded">Трёхкомнатные</a>
+                                 </li>
+                                 <li><a href="#new-four-room"
+                                       class="block px-3 py-2 text-sm text-gray-800 hover:bg-blue-200 menu-transition rounded">Четырехкомн.</a>
+                                 </li>
+                                 <li><a href="#assignment"
+                                       class="block px-3 py-2 text-sm text-gray-800 hover:bg-blue-200 menu-transition rounded">Переуступки</a>
+                                 </li>
+                                 <li><a href="#all-complexes"
+                                       class="block px-3 py-2 text-sm text-gray-800 hover:bg-blue-200 menu-transition rounded">Все
+                                       Жилые Комплексы</a></li>
+                                 <li><a href="#how-to-choose"
+                                       class="block px-3 py-2 text-sm text-gray-800 hover:bg-blue-200 menu-transition rounded">Как
+                                       выбр. Застр-ка?</a></li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </li>
+
+                     <!-- Купить комнату (Уровень 2) -->
+                     <li class="group relative">
+                        <a href="#buy-room"
+                           class="flex items-center justify-between px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition border-b border-blue-200">
+                           Купить комнату
+                           <svg class="w-4 h-4 transform group-hover:rotate-90 menu-transition" fill="none"
+                              stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                              </path>
+                           </svg>
+                        </a>
+
+                        <!-- Подменю 3 уровня -->
+                        <ul
+                           class="sub-menu-2 absolute left-full top-0 ml-1 w-64 bg-blue-100 rounded-lg shadow-lg z-20 menu-transition border border-blue-200">
+                           <li><a href="#in-two-room"
+                                 class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-t-lg border-b border-blue-200">В
+                                 двухкомнатной кв.</a></li>
+                           <li><a href="#in-three-room"
+                                 class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition border-b border-blue-200">В
+                                 Трёхкомнатной кв.</a></li>
+                           <li><a href="#in-four-room"
+                                 class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition border-b border-blue-200">В
+                                 4</a></li>
+                           <li><a href="#in-five-room"
+                                 class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition border-b border-blue-200">В
+                                 5</a></li>
+                           <li><a href="#in-six-room"
+                                 class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-b-lg">В
+                                 6</a></li>
+                        </ul>
+                     </li>
+
+                     <!-- Продажа недвижимости (Уровень 2) -->
+                     <li class="group relative">
+                        <a href="#sell-property"
+                           class="flex items-center justify-between px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-b-lg">
+                           Продажа недвижимости
+                           <svg class="w-4 h-4 transform group-hover:rotate-90 menu-transition" fill="none"
+                              stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                              </path>
+                           </svg>
+                        </a>
+
+                        <!-- Подменю 3 уровня -->
+                        <ul
+                           class="sub-menu-2 absolute left-full top-0 ml-1 w-64 bg-blue-100 rounded-lg shadow-lg z-20 menu-transition border border-blue-200">
+                           <li><a href="#sell-apartment"
+                                 class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-t-lg border-b border-blue-200">Продать
+                                 квартиру</a></li>
+                           <li><a href="#sell-room"
+                                 class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-b-lg">Продать
+                                 комнату</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+               </li>
+
+               <!-- Выбираем лучший район -->
+               <li class="group relative">
+                  <a href="./vibor-rayon-spb.html"
+                     class="flex items-center px-5 py-3 rounded-lg text-gray-800 hover:bg-blue-200 menu-transition font-medium">
+                     Выбираем лучший район
+                  </a>
+               </li>
+
+               <!-- Блог -->
+               <li class="group relative">
+                  <a href="#blog"
+                     class="flex items-center px-5 py-3 rounded-lg text-gray-800 hover:bg-blue-200 menu-transition font-medium">
+                     Блог
+                  </a>
+               </li>
+
+               <!-- Контакты -->
+               <li class="group relative">
+                  <a href="#contacts"
+                     class="flex items-center px-5 py-3 rounded-lg text-gray-800 hover:bg-blue-200 menu-transition font-medium">
+                     Контакты
+                  </a>
+               </li>
+
+               <!-- Обо мне и "Авентин" -->
+               <li class="group relative">
+                  <a href="#about"
+                     class="flex items-center px-5 py-3 rounded-lg text-gray-800 hover:bg-blue-200 menu-transition font-medium">
+                     Обо мне и "Авентин"
+                  </a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+
+      <!-- Бургер-меню для планшетов и мобильных -->
+      <div class="bg-blue-100 py-3 flex justify-between items-center px-4 relative md:hidden">
+         <div class="burger-menu" id="burger-menu">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+         </div>
+      </div>
+
+      <!-- Мобильное меню -->
+      <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+      <nav class="mobile-menu" id="mobile-menu">
+         <ul class="flex flex-col space-y-1 list-none">
+            <!-- Главная страница -->
+            <li class="group relative">
+               <a href="./index.html"
+                  class="flex items-center px-5 py-3 rounded-lg text-gray-800 hover:bg-blue-200 menu-transition font-medium mobile-menu-item">
+                  Главная страница
+               </a>
+            </li>
+
+            <!-- Что вы хотите? (Уровень 1) -->
+            <li class="group relative">
+               <a href="#services"
+                  class="flex items-center justify-between px-5 py-3 rounded-lg text-gray-800 hover:bg-blue-200 menu-transition font-medium mobile-menu-item mobile-submenu-trigger">
+                  Что вы хотите?
+                  <svg class="w-4 h-4 ml-1 transform menu-transition" fill="none" stroke="currentColor"
+                     viewBox="0 0 24 24">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+               </a>
+
+               <!-- Подменю 2 уровня -->
+               <ul class="sub-menu-1">
+                  <!-- Купить квартиру (Уровень 2) -->
+                  <li class="group relative">
+                     <a href="#buy-apartment"
+                        class="flex items-center justify-between px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-t-lg mobile-submenu-trigger">
+                        Купить квартиру
+                        <svg class="w-4 h-4 transform menu-transition" fill="none" stroke="currentColor"
+                           viewBox="0 0 24 24">
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                           </path>
+                        </svg>
+                     </a>
+
+                     <!-- Подменю 3 уровня -->
+                     <ul class="sub-menu-2">
+                        <!-- Вторичный рынок (Уровень 3) -->
+                        <li class="group relative">
+                           <a href="#secondary-market"
+                              class="flex items-center justify-between px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-t-lg mobile-submenu-trigger">
+                              Вторичный рынок
+                              <svg class="w-4 h-4 transform menu-transition" fill="none" stroke="currentColor"
+                                 viewBox="0 0 24 24">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                 </path>
+                              </svg>
+                           </a>
+
+                           <!-- Внутренний список для вторичного рынка (Уровень 4) -->
+                           <ul class="sub-menu-3">
+                              <li><a href="#studios"
+                                    class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded">Студии</a>
+                              </li>
+                              <li><a href="#one-room"
+                                    class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded">Однокомнатные
+                                    кв-ры</a></li>
+                              <li><a href="#two-room"
+                                    class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded">Двухкомнатные
+                                    кв-ры</a></li>
+                              <li><a href="#three-room"
+                                    class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded">Трёхкомнатные
+                                    кв-ры</a></li>
+                              <li><a href="#four-room"
+                                    class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded">Четырехкомн.
+                                    кв-ры</a></li>
+                           </ul>
+                        </li>
+
+                        <!-- Первичный рынок (Уровень 3) -->
+                        <li class="group relative">
+                           <a href="#primary-market"
+                              class="flex items-center justify-between px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition mobile-submenu-trigger">
+                              Первичный рынок
+                              <svg class="w-4 h-4 transform menu-transition" fill="none" stroke="currentColor"
+                                 viewBox="0 0 24 24">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                 </path>
+                              </svg>
+                           </a>
+
+                           <!-- Внутренний список для первичного рынка (Уровень 4) -->
+                           <ul class="sub-menu-3">
+                              <li><a href="#new-studios"
+                                    class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded">Студии</a>
+                              </li>
+                              <li><a href="#new-one-room"
+                                    class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded">Однокомнатные</a>
+                              </li>
+                              <li><a href="#new-two-room"
+                                    class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded">Двухкомнатные</a>
+                              </li>
+                              <li><a href="#new-three-room"
+                                    class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded">Трёхкомнатные</a>
+                              </li>
+                              <li><a href="#new-four-room"
+                                    class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded">Четырехкомн.</a>
+                              </li>
+                              <li><a href="#assignment"
+                                    class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded">Переуступки</a>
+                              </li>
+                              <li><a href="#all-complexes"
+                                    class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded">Все
+                                    Жилые
+                                    Комплексы</a></li>
+                              <li><a href="#how-to-choose"
+                                    class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded">Как
+                                    выбр.
+                                    Застр-ка?</a></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>
+
+                  <!-- Купить комнату (Уровень 2) -->
+                  <li class="group relative">
+                     <a href="#buy-room"
+                        class="flex items-center justify-between px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition mobile-submenu-trigger">
+                        Купить комнату
+                        <svg class="w-4 h-4 transform menu-transition" fill="none" stroke="currentColor"
+                           viewBox="0 0 24 24">
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                           </path>
+                        </svg>
+                     </a>
+
+                     <!-- Подменю 3 уровня -->
+                     <ul class="sub-menu-2">
+                        <li><a href="#in-two-room"
+                              class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-t-lg">В
+                              двухкомнатной
+                              кв.</a></li>
+                        <li><a href="#in-three-room"
+                              class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition">В
+                              Трёхкомнатной кв.</a></li>
+                        <li><a href="#in-four-room"
+                              class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition">В
+                              4</a></li>
+                        <li><a href="#in-five-room"
+                              class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition">В
+                              5</a></li>
+                        <li><a href="#in-six-room"
+                              class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-b-lg">В
+                              6</a></li>
+                     </ul>
+                  </li>
+
+                  <!-- Продажа недвижимости (Уровень 2) -->
+                  <li class="group relative">
+                     <a href="#sell-property"
+                        class="flex items-center justify-between px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-b-lg mobile-submenu-trigger">
+                        Продажа недвижимости
+                        <svg class="w-4 h-4 transform menu-transition" fill="none" stroke="currentColor"
+                           viewBox="0 0 24 24">
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                           </path>
+                        </svg>
+                     </a>
+
+                     <!-- Подменю 3 уровня -->
+                     <ul class="sub-menu-2">
+                        <li><a href="#sell-apartment"
+                              class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-t-lg">Продать
+                              квартиру</a></li>
+                        <li><a href="#sell-room"
+                              class="block px-5 py-3 text-gray-800 hover:bg-blue-200 menu-transition rounded-b-lg">Продать
+                              комнату</a></li>
+                     </ul>
+                  </li>
+               </ul>
+            </li>
+
+            <!-- Выбираем лучший район -->
+            <li class="group relative">
+               <a href="./vibor-rayon-spb.html"
+                  class="flex items-center px-5 py-3 rounded-lg text-gray-800 hover:bg-blue-200 menu-transition font-medium mobile-menu-item">
+                  Выбираем лучший район
+               </a>
+            </li>
+
+            <!-- Блог -->
+            <li class="group relative">
+               <a href="#blog"
+                  class="flex items-center px-5 py-3 rounded-lg text-gray-800 hover:bg-blue-200 menu-transition font-medium mobile-menu-item">
+                  Блог
+               </a>
+            </li>
+
+            <!-- Контакты -->
+            <li class="group relative">
+               <a href="#contacts"
+                  class="flex items-center px-5 py-3 rounded-lg text-gray-800 hover:bg-blue-200 menu-transition font-medium mobile-menu-item">
+                  Контакты
+               </a>
+            </li>
+
+            <!-- Обо мне и "Авентин" -->
+            <li class="group relative">
+               <a href="#about"
+                  class="flex items-center px-5 py-3 rounded-lg text-gray-800 hover:bg-blue-200 menu-transition font-medium mobile-menu-item">
+                  Обо мне и "Авентин"
+               </a>
+            </li>
+         </ul>
+      </nav>
+   </header>
+   <main>
+      <!-- Заголовок страницы -->
+      <section class="section-black py-12 md:py-16">
+         <div class="content-container px-4 md:px-6">
+            <div class="max-w-4xl mx-auto text-center">
+               <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6">
+                  <span class="gradient-text">Районы Санкт-Петербурга</span>
+               </h1>
+               <p class="text-lg md:text-xl text-gray-300 mb-6 md:mb-8">
+                  Интерактивная карта районов города. Наведите на название района, чтобы увидеть его границы на карте.
+               </p>
+            </div>
+         </div>
+      </section>
+      <!-- Блок фильтров -->
+      <div class="mb-8 p-6 bg-white rounded-xl shadow-lg">
+         <h3 class="text-xl font-bold text-gray-800 mb-4">Подбор района по критериям</h3>
+         <p class="text-gray-600 mb-6">Выберите важные для вас критерии. Система автоматически покажет подходящие
+            районы.</p>
+
+         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+            <!-- Фильтр 1: Цена на м² -->
+            <div class="space-y-2">
+               <label class="block text-sm font-medium text-gray-700">
+                  <i class="fas fa-money-bill-wave mr-1 text-green-600"></i>
+                  Цена на м²
+               </label>
+               <select
+                  class="filter-select price-filter w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                  data-filter="price">
+                  <option value="0" selected>Не важно</option>
+                  <option value="1">1 - Очень низкая</option>
+                  <option value="2">2 - Низкая</option>
+                  <option value="3">3 - Ниже среднего</option>
+                  <option value="4">4 - Немного ниже среднего</option>
+                  <option value="5">5 - Средняя</option>
+                  <option value="6">6 - Немного выше среднего</option>
+                  <option value="7">7 - Выше среднего</option>
+                  <option value="8">8 - Высокая</option>
+                  <option value="9">9 - Очень высокая</option>
+                  <option value="10">10 - Премиум</option>
+               </select>
+            </div>
+
+            <!-- Фильтр 2: Экология -->
+            <div class="space-y-2">
+               <label class="block text-sm font-medium text-gray-700">
+                  <i class="fas fa-leaf mr-1 text-green-600"></i>
+                  Экология
+               </label>
+               <select
+                  class="filter-select ecology-filter w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                  data-filter="ecology">
+                  <option value="0" selected>Не важно</option>
+                  <option value="1">1 - Очень плохо</option>
+                  <option value="2">2 - Плохо</option>
+                  <option value="3">3 - Ниже среднего</option>
+                  <option value="4">4 - Немного ниже среднего</option>
+                  <option value="5">5 - Средняя</option>
+                  <option value="6">6 - Немного выше среднего</option>
+                  <option value="7">7 - Хорошо</option>
+                  <option value="8">8 - Очень хорошо</option>
+                  <option value="9">9 - Отлично</option>
+                  <option value="10">10 - Идеально</option>
+               </select>
+            </div>
+
+            <!-- Фильтр 3: Инфраструктура -->
+            <div class="space-y-2">
+               <label class="block text-sm font-medium text-gray-700">
+                  <i class="fas fa-building mr-1 text-blue-600"></i>
+                  Инфраструктура
+               </label>
+               <select
+                  class="filter-select infrastructure-filter w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                  data-filter="infrastructure">
+                  <option value="0" selected>Не важно</option>
+                  <option value="1">1 - Очень плохо</option>
+                  <option value="2">2 - Плохо</option>
+                  <option value="3">3 - Ниже среднего</option>
+                  <option value="4">4 - Немного ниже среднего</option>
+                  <option value="5">5 - Средняя</option>
+                  <option value="6">6 - Немного выше среднего</option>
+                  <option value="7">7 - Хорошо</option>
+                  <option value="8">8 - Очень хорошо</option>
+                  <option value="9">9 - Отлично</option>
+                  <option value="10">10 - Идеально</option>
+               </select>
+            </div>
+
+            <!-- Фильтр 4: Транспорт -->
+            <div class="space-y-2">
+               <label class="block text-sm font-medium text-gray-700">
+                  <i class="fas fa-subway mr-1 text-red-600"></i>
+                  Транспорт
+               </label>
+               <select
+                  class="filter-select transport-filter w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                  data-filter="transport">
+                  <option value="0" selected>Не важно</option>
+                  <option value="1">1 - Очень плохо</option>
+                  <option value="2">2 - Плохо</option>
+                  <option value="3">3 - Ниже среднего</option>
+                  <option value="4">4 - Немного ниже среднего</option>
+                  <option value="5">5 - Средняя</option>
+                  <option value="6">6 - Немного выше среднего</option>
+                  <option value="7">7 - Хорошо</option>
+                  <option value="8">8 - Очень хорошо</option>
+                  <option value="9">9 - Отлично</option>
+                  <option value="10">10 - Идеально</option>
+               </select>
+            </div>
+
+            <!-- Фильтр 5: Образование -->
+            <div class="space-y-2">
+               <label class="block text-sm font-medium text-gray-700">
+                  <i class="fas fa-graduation-cap mr-1 text-purple-600"></i>
+                  Образование
+               </label>
+               <select
+                  class="filter-select education-filter w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                  data-filter="education">
+                  <option value="0" selected>Не важно</option>
+                  <option value="1">1 - Очень плохо</option>
+                  <option value="2">2 - Плохо</option>
+                  <option value="3">3 - Ниже среднего</option>
+                  <option value="4">4 - Немного ниже среднего</option>
+                  <option value="5">5 - Средняя</option>
+                  <option value="6">6 - Немного выше среднего</option>
+                  <option value="7">7 - Хорошо</option>
+                  <option value="8">8 - Очень хорошо</option>
+                  <option value="9">9 - Отлично</option>
+                  <option value="10">10 - Идеально</option>
+               </select>
+            </div>
+
+            <!-- Фильтр 6: Медицина -->
+            <div class="space-y-2">
+               <label class="block text-sm font-medium text-gray-700">
+                  <i class="fas fa-hospital mr-1 text-red-500"></i>
+                  Медицина
+               </label>
+               <select
+                  class="filter-select medicine-filter w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                  data-filter="medicine">
+                  <option value="0" selected>Не важно</option>
+                  <option value="1">1 - Очень плошо</option>
+                  <option value="2">2 - Плохо</option>
+                  <option value="3">3 - Ниже среднего</option>
+                  <option value="4">4 - Немного ниже среднего</option>
+                  <option value="5">5 - Средняя</option>
+                  <option value="6">6 - Немного выше среднего</option>
+                  <option value="7">7 - Хорошо</option>
+                  <option value="8">8 - Очень хорошо</option>
+                  <option value="9">9 - Отлично</option>
+                  <option value="10">10 - Идеально</option>
+               </select>
+            </div>
+
+            <!-- Фильтр 7: Возраст района -->
+            <div class="space-y-2">
+               <label class="block text-sm font-medium text-gray-700">
+                  <i class="fas fa-history mr-1 text-yellow-600"></i>
+                  Возраст района
+               </label>
+               <select
+                  class="filter-select age-filter w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                  data-filter="age">
+                  <option value="0" selected>Не важно</option>
+                  <option value="1">1 - Очень старый</option>
+                  <option value="2">2 - Старый</option>
+                  <option value="3">3 - Средне-старый</option>
+                  <option value="4">4 - Немного старый</option>
+                  <option value="5">5 - Средний возраст</option>
+                  <option value="6">6 - Немного новый</option>
+                  <option value="7">7 - Новый</option>
+                  <option value="8">8 - Современный</option>
+                  <option value="9">9 - Очень новый</option>
+                  <option value="10">10 - Ультрасовременный</option>
+               </select>
+            </div>
+
+            <!-- Фильтр 8: Безопасность -->
+            <div class="space-y-2">
+               <label class="block text-sm font-medium text-gray-700">
+                  <i class="fas fa-shield-alt mr-1 text-green-600"></i>
+                  Безопасность
+               </label>
+               <select
+                  class="filter-select safety-filter w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                  data-filter="safety">
+                  <option value="0" selected>Не важно</option>
+                  <option value="1">1 - Очень низкая</option>
+                  <option value="2">2 - Низкая</option>
+                  <option value="3">3 - Ниже среднего</option>
+                  <option value="4">4 - Немного ниже среднего</option>
+                  <option value="5">5 - Средняя</option>
+                  <option value="6">6 - Немного выше среднего</option>
+                  <option value="7">7 - Хорошая</option>
+                  <option value="8">8 - Высокая</option>
+                  <option value="9">9 - Очень высокая</option>
+                  <option value="10">10 - Максимальная</option>
+               </select>
+            </div>
+
+            <!-- Фильтр 9: Трудоустройство -->
+            <div class="space-y-2">
+               <label class="block text-sm font-medium text-gray-700">
+                  <i class="fas fa-briefcase mr-1 text-blue-500"></i>
+                  Трудоустройство
+               </label>
+               <select
+                  class="filter-select employment-filter w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                  data-filter="employment">
+                  <option value="0" selected>Не важно</option>
+                  <option value="1">1 - Очень плохо</option>
+                  <option value="2">2 - Плохо</option>
+                  <option value="3">3 - Ниже среднего</option>
+                  <option value="4">4 - Немного ниже среднего</option>
+                  <option value="5">5 - Средняя</option>
+                  <option value="6">6 - Немного выше среднего</option>
+                  <option value="7">7 - Хорошо</option>
+                  <option value="8">8 - Очень хорошо</option>
+                  <option value="9">9 - Отлично</option>
+                  <option value="10">10 - Идеально</option>
+               </select>
+            </div>
+
+            <!-- Фильтр 10: Пробки -->
+            <div class="space-y-2">
+               <label class="block text-sm font-medium text-gray-700">
+                  <i class="fas fa-traffic-light mr-1 text-orange-600"></i>
+                  Пробки
+               </label>
+               <select
+                  class="filter-select traffic-filter w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                  data-filter="traffic">
+                  <option value="0" selected>Не важно</option>
+                  <option value="1">1 - Нет пробок</option>
+                  <option value="2">2 - Очень низкая</option>
+                  <option value="3">3 - Низкая</option>
+                  <option value="4">4 - Ниже среднего</option>
+                  <option value="5">5 - Средняя</option>
+                  <option value="6">6 - Выше среднего</option>
+                  <option value="7">7 - Высокая</option>
+                  <option value="8">8 - Очень высокая</option>
+                  <option value="9">9 - Постоянные пробки</option>
+                  <option value="10">10 - Критическая</option>
+               </select>
+            </div>
+         </div>
+
+         <!-- Кнопки управления -->
+         <div class="flex flex-col sm:flex-row justify-between items-center mt-6 pt-6 border-t border-gray-200">
+            <div class="mb-4 sm:mb-0">
+               <button id="reset-filters-btn"
+                  class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition duration-300 font-medium shadow-sm hover:shadow">
+                  <i class="fas fa-redo mr-2"></i>Сбросить все фильтры
+               </button>
+            </div>
+            <div class="text-center sm:text-right">
+               <div id="filter-results-count" class="text-xl font-bold text-blue-600">18 районов</div>
+               <div class="text-sm text-gray-600">соответствует критериям</div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Результаты фильтрации -->
+      <div id="filter-results-container" class="mb-8 hidden">
+         <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200 shadow-sm">
+            <div class="flex justify-between items-center mb-4">
+               <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                  <i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>
+                  Подходящие районы
+               </h3>
+               <span id="active-results-count" class="px-3 py-1 bg-blue-500 text-white rounded-full text-sm font-bold">
+                  0
+               </span>
+            </div>
+
+            <div id="filtered-districts-list" class="space-y-3 max-h-96 overflow-y-auto pr-2">
+               <!-- Здесь появятся отфильтрованные районы -->
+            </div>
+
+            <div class="mt-4 p-3 bg-white rounded-lg border border-blue-100">
+               <p class="text-sm text-blue-700 flex items-center">
+                  <i class="fas fa-mouse-pointer mr-2"></i>
+                  Наведите на район, чтобы увидеть его на карте. Кликните для подробной информации.
+               </p>
+            </div>
+         </div>
+      </div>
+      <!-- Основной контент -->
+      <section class="section-light-blue py-12 md:py-16">
+         <div class="content-container px-4 md:px-6">
+            <div class="flex flex-col lg:flex-row gap-6 md:gap-8">
+
+               <!-- Список районов -->
+               <div class="lg:w-1/3 order-1 lg:order-1">
+                  <div class="bg-white rounded-xl shadow-lg p-4 md:p-6 lg:sticky lg:top-32">
+                     <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6 pb-3 border-b border-gray-200">
+                        <i class="fas fa-list mr-2 text-blue-600"></i>Список районов
+                     </h2>
+                     <div id="districts-list" class="space-y-2 max-h-[500px] overflow-y-auto pr-2">
+                        <!-- Районы будут сгенерированы JavaScript -->
+                     </div>
+                     <div class="mt-6 p-3 md:p-4 bg-blue-50 rounded-lg border border-blue-200">
+                        <h3 class="font-bold text-blue-800 mb-2 text-sm md:text-base">Инструкция:</h3>
+                        <p class="text-xs md:text-sm text-blue-700">
+                           Наведите курсор на название района, чтобы увидеть его границы на карте. Кликните для
+                           детальной информации.
+                        </p>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Интерактивная карта с переключением изображений -->
+               <div class="lg:w-2/3 order-2 lg:order-2">
+                  <div class="bg-white rounded-xl shadow-lg p-4 md:p-6">
+                     <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6 pb-3 border-b border-gray-200">
+                        <i class="fas fa-map mr-2 text-blue-600"></i>Интерактивная карта районов
+                     </h2>
+
+                     <!-- Контейнер для карты с переключением изображений -->
+                     <div
+                        class="relative w-full h-auto min-h-[400px] md:min-h-[600px] border border-gray-300 rounded-lg overflow-hidden bg-gray-50">
+                        <!-- Основное изображение города (по умолчанию) -->
+                        <img id="district-main-map" src="../image/interaktivnaya-karta-spb/SPb.png"
+                           alt="Схематичная карта Санкт-Петербурга"
+                           class="absolute inset-0 w-full h-full object-contain transition-opacity duration-500 opacity-100"
+                           loading="lazy">
+
+                        <!-- Контейнер для изображений районов -->
+                        <div id="district-maps-container" class="absolute inset-0">
+                           <!-- Изображения районов будут добавлены через JavaScript -->
+                        </div>
+
+                        <!-- Индикатор загрузки -->
+                        <div id="map-loading"
+                           class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 hidden">
+                           <div class="text-center">
+                              <div
+                                 class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500">
+                              </div>
+                              <p class="mt-3 text-gray-600">Загрузка карты района...</p>
+                           </div>
+                        </div>
+
+                        <!-- Легенда -->
+                        <div
+                           class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg hidden md:block">
+                           <div class="flex items-center mb-2">
+                              <div class="w-4 h-4 bg-blue-600 mr-2"></div>
+                              <span class="text-sm font-medium">Выбранный район</span>
+                           </div>
+                           <div class="flex items-center">
+                              <div class="w-4 h-4 border-2 border-blue-400 bg-blue-100 mr-2"></div>
+                              <span class="text-sm font-medium">Остальные районы</span>
+                           </div>
+                        </div>
+                     </div>
+
+                     <!-- Мобильная легенда -->
+                     <div class="md:hidden mt-4 bg-blue-50 p-3 rounded-lg border border-blue-200">
+                        <div class="flex items-center justify-center space-x-6">
+                           <div class="flex items-center">
+                              <div class="w-4 h-4 bg-blue-600 mr-2"></div>
+                              <span class="text-sm font-medium">Выбранный район</span>
+                           </div>
+                           <div class="flex items-center">
+                              <div class="w-4 h-4 border-2 border-blue-400 bg-blue-100 mr-2"></div>
+                              <span class="text-sm font-medium">Остальные районы</span>
+                           </div>
+                        </div>
+                     </div>
+
+                     <!-- Статистика -->
+                     <div class="mt-6 md:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+                        <div class="bg-blue-50 p-3 md:p-4 rounded-lg border border-blue-200">
+                           <div class="text-2xl md:text-3xl font-bold text-blue-700 mb-1">18</div>
+                           <div class="text-xs md:text-sm text-blue-800">районов в СПб</div>
+                        </div>
+                        <div class="bg-blue-50 p-3 md:p-4 rounded-lg border border-blue-200">
+                           <div class="text-2xl md:text-3xl font-bold text-blue-700 mb-1">5.6 млн</div>
+                           <div class="text-xs md:text-sm text-blue-800">население города</div>
+                        </div>
+                        <div class="bg-blue-50 p-3 md:p-4 rounded-lg border border-blue-200">
+                           <div class="text-2xl md:text-3xl font-bold text-blue-700 mb-1">605 км²</div>
+                           <div class="text-xs md:text-sm text-blue-800">площадь города</div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Информация по районам -->
+      <section class="section-black py-12 md:py-16">
+         <div class="content-container px-4 md:px-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">
+               <span class="gradient-text">Характеристики районов</span>
+            </h2>
+
+            <div id="districts-info" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+               <!-- Карточки будут сгенерированы JavaScript -->
+            </div>
+
+            <!-- Призыв к действию -->
+            <div
+               class="mt-12 md:mt-16 p-6 md:p-8 bg-gradient-to-r from-blue-900 to-blue-700 rounded-xl md:rounded-2xl text-center">
+               <h3 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">Нужна помощь в выборе района?</h3>
+               <p class="text-blue-100 mb-4 md:mb-6 max-w-2xl mx-auto text-sm md:text-base">
+                  Я помогу подобрать оптимальный район в Санкт-Петербурге под ваш бюджет, требования к инфраструктуре и
+                  транспортной доступности.
+               </p>
+               <button
+                  class="bg-white text-blue-700 hover:bg-blue-100 font-bold py-2 px-6 md:py-3 md:px-8 rounded-lg transition duration-300 transform hover:scale-105 text-sm md:text-base">
+                  <i class="fas fa-phone mr-2"></i>Получить консультацию
+               </button>
+            </div>
+         </div>
+      </section>
+   </main>
+
+   <!-- Логика переключения картинок районов -->
+   <!-- <script>
+      document.addEventListener('DOMContentLoaded', function () {
+         // Данные районов Санкт-Петербурга с путями к изображениям
+         const districts = [
+            {
+               id: 'admiralteyskiy',
+               name: 'Адмиралтейский',
+               population: '157 тыс.',
+               area: '13.82 км²',
+               metro: ['Садовая', 'Сенная площадь', 'Технологический институт', 'Балтийская', 'Нарвская'],
+               description: 'Исторический центр города с множеством архитектурных памятников',
+               image: './image/interaktivnaya-karta-spb/Admiralteyskiy.png' // Путь к изображению с выделением района
+            },
+            {
+               id: 'vasileostrovskiy',
+               name: 'Василеостровский',
+               population: '209 тыс.',
+               area: '21.47 км²',
+               metro: ['Василеостровская', 'Приморская', 'Спортивная'],
+               description: 'Островной район с развитой инфраструктурой и набережными',
+               image: './image/interaktivnaya-karta-spb/Vasileostrovskiy.png'
+            },
+            {
+               id: 'petrogradskiy',
+               name: 'Петроградский',
+               population: '135 тыс.',
+               area: '24 км²',
+               metro: ['Петроградская', 'Горьковская', 'Чкаловская', 'Крестовский остров', 'Спортивная'],
+               description: 'Престижный исторический район на островах',
+               image: './image/interaktivnaya-karta-spb/Petrogradskiy.png'
+            },
+            {
+               id: 'vyborgskiy',
+               name: 'Выборгский',
+               population: '511 тыс.',
+               area: '115.38 км²',
+               metro: ['Выборгская', 'Лесная', 'Площадь Мужества', 'Политехническая'],
+               description: 'Крупный район с промышленными предприятиями и жилыми массивами',
+               image: './image/interaktivnaya-karta-spb/Viborgskiy.png'
+            },
+            {
+               id: 'kalininskiy',
+               name: 'Калининский',
+               population: '535 тыс.',
+               area: '40.12 км²',
+               metro: ['Академическая', 'Гражданский проспект', 'Девяткино', 'Площадь Мужества', 'Политехническая'],
+               description: 'Самый густонаселенный район с развитой транспортной сетью',
+               image: './image/interaktivnaya-karta-spb/Kalininskiy.png'
+            },
+            {
+               id: 'kirovskiy',
+               name: 'Кировский',
+               population: '338 тыс.',
+               area: '48 км²',
+               metro: ['Кировский завод', 'Автово', 'Ленинский проспект', 'Проспект Ветеранов', 'Нарвская'],
+               description: 'Промышленный район с историческими кварталами',
+               image: './image/interaktivnaya-karta-spb/Kirovskiy.png'
+            },
+            {
+               id: 'moskovskiy',
+               name: 'Московский',
+               population: '337 тыс.',
+               area: '71.07 км²',
+               metro: ['Московские ворота', 'Электросила', 'Парк Победы', 'Московская', 'Звездная', 'Купчино'],
+               description: 'Район с хорошо развитой инфраструктурой',
+               image: './image/interaktivnaya-karta-spb/Moskovskiy.png'
+            },
+            {
+               id: 'nevskiy',
+               name: 'Невский',
+               population: '538 тыс.',
+               area: '61.79 км²',
+               metro: ['Елизаровская', 'Ломоносовская', 'Пролетарская', 'Обухово', 'Рыбацкое', 'Улица Дыбенко'],
+               description: 'Крупнейший район по численности населения',
+               image: './image/interaktivnaya-karta-spb/Nevskiy.png'
+            },
+            {
+               id: 'frunzenskiy',
+               name: 'Фрунзенский',
+               population: '401 тыс.',
+               area: '37.5 км²',
+               metro: ['Международная', 'Бухарестская', 'Волковская', 'Обводный канал'],
+               description: 'Плотно заселенный район с хорошей транспортной доступностью',
+               image: './image/interaktivnaya-karta-spb/Frunzenskiy.png'
+            },
+            {
+               id: 'primorskiy',
+               name: 'Приморский',
+               population: '568 тыс.',
+               area: '109.87 км²',
+               metro: ['Старая Деревня', 'Крестовский остров', 'Чкаловская', 'Беговая', 'Комендантский проспект'],
+               description: 'Современный район с новостройками у Финского залива',
+               image: './image/interaktivnaya-karta-spb/Primorskiy.png'
+            },
+            {
+               id: 'krasnogvardeiskiy',
+               name: 'Красногвардейский',
+               population: '369 тыс.',
+               area: '56.8 км²',
+               metro: ['Ладожская', 'Новочеркасская'],
+               description: 'Молодой район с современной застройкой',
+               image: './image/interaktivnaya-karta-spb/Krasnogvardeiskiy.png'
+            },
+            {
+               id: 'krasnoselskiy',
+               name: 'Красносельский',
+               population: '395 тыс.',
+               area: '115 км²',
+               metro: ['Проспект Ветеранов', 'Ленинский проспект'],
+               description: 'Самый быстрорастущий район с новостройками',
+               image: './image/interaktivnaya-karta-spb/Krasnoselskiy.png'
+            },
+            {
+               id: 'kolpinskiy',
+               name: 'Колпинский',
+               population: '187 тыс.',
+               area: '105.8 км²',
+               metro: [],
+               description: 'Отдаленный район с собственным историческим центром',
+               image: './image/interaktivnaya-karta-spb/Kolpinskiy.png'
+            },
+            {
+               id: 'pushkinskiy',
+               name: 'Пушкинский',
+               population: '189 тыс.',
+               area: '239.95 км²',
+               metro: [],
+               description: 'Район с императорскими резиденциями и парками',
+               image: './image/interaktivnaya-karta-spb/Pyshkinskiy.png'
+            },
+            {
+               id: 'kurortnyy',
+               name: 'Курортный',
+               population: '78 тыс.',
+               area: '267.91 км²',
+               metro: [],
+               description: 'Приморский курортный район с пляжами и санаториями',
+               image: './image/interaktivnaya-karta-spb/Kurortniy.png'
+            },
+            {
+               id: 'petrodvortsovyy',
+               name: 'Петродворцовый',
+               population: '135 тыс.',
+               area: '107.4 км²',
+               metro: [],
+               description: 'Район с дворцово-парковыми ансамблями',
+               image: './image/interaktivnaya-karta-spb/Petrodvorcoviy.png'
+            },
+            {
+               id: 'kronshtadtskiy',
+               name: 'Кронштадтский',
+               population: '44 тыс.',
+               area: '19.35 км²',
+               metro: [],
+               description: 'Островной район-порт с богатой историей',
+               image: './image/interaktivnaya-karta-spb/Kronshtadtskiy.png'
+            },
+            {
+               id: 'tsentralnyy',
+               name: 'Центральный',
+               population: '214 тыс.',
+               area: '17.12 км²',
+               metro: ['Владимирская', 'Достоевская', 'Лиговский проспект', 'Маяковская', 'Площадь Восстания', 'Чернышевская'],
+               description: 'Деловой и культурный центр города',
+               image: './image/interaktivnaya-karta-spb/Uentralniy.png'
+            }
+         ];
+
+         // Элементы DOM
+         const districtsList = document.getElementById('districts-list');
+         const cardsContainer = document.getElementById('districts-info');
+         const mainMap = document.getElementById('district-main-map');
+         const mapsContainer = document.getElementById('district-maps-container');
+         const loadingIndicator = document.getElementById('map-loading');
+
+         // Переменные для управления состоянием
+         let activeDistrict = null;
+         let hoveredDistrict = null;
+         let preloadedImages = {}; // Кэш предзагруженных изображений
+         let isMobile = window.innerWidth < 768;
+         let switchTimeout = null;
+
+         // Функция для предзагрузки изображений
+         function preloadDistrictImages() {
+            console.log('Начинаю предзагрузку изображений районов...');
+
+            districts.forEach(district => {
+               const img = new Image();
+               img.src = district.image;
+               img.alt = `Карта района ${district.name}`;
+               img.classList.add('absolute', 'inset-0', 'w-full', 'h-full', 'object-contain', 'opacity-0', 'transition-opacity', 'duration-500', 'district-map');
+               img.dataset.districtId = district.id;
+
+               // Сохраняем в кэш
+               preloadedImages[district.id] = img;
+
+               // Добавляем в контейнер
+               mapsContainer.appendChild(img);
+
+               // Обработчики для отладки
+               img.onload = () => {
+                  console.log(`✓ Изображение загружено: ${district.name}`);
+               };
+
+               img.onerror = () => {
+                  console.error(`✗ Ошибка загрузки: ${district.name} (${district.image})`);
+                  // Если изображение не загрузилось, показываем заглушку
+                  img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f0f0f0"/><text x="50" y="50" text-anchor="middle" dy=".3em" fill="%23999" font-size="10">Нет карты</text></svg>';
+               };
+            });
+
+            console.log('Предзагрузка изображений завершена');
+         }
+
+         // Создаем элементы списка районов
+         function createDistrictsList() {
+            districts.forEach((district, index) => {
+               // Элемент списка
+               const listItem = document.createElement('button');
+               listItem.className = 'flex items-center w-full p-3 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all duration-300 cursor-pointer district-list-item text-left group';
+               listItem.dataset.districtId = district.id;
+               listItem.dataset.index = index;
+               listItem.type = 'button';
+               listItem.title = `Показать ${district.name} на карте`;
+
+               // Номер района
+               const numberSpan = document.createElement('span');
+               numberSpan.className = 'text-xs font-bold text-blue-600 mr-3';
+               numberSpan.textContent = (index + 1).toString().padStart(2, '0');
+
+               // Цветовой индикатор
+               const colorIndicator = document.createElement('div');
+               colorIndicator.className = 'w-4 h-4 rounded-full mr-3 flex-shrink-0 bg-blue-100 border border-blue-300 group-hover:bg-blue-200 transition-colors';
+
+               // Текст
+               const textDiv = document.createElement('div');
+               textDiv.className = 'flex-grow';
+               textDiv.innerHTML = `
+            <div class="font-bold text-gray-800 text-sm md:text-base group-hover:text-blue-700 transition-colors">${district.name}</div>
+            <div class="text-xs md:text-sm text-gray-600 mt-1 flex items-center">
+              <i class="fas fa-users mr-1"></i>${district.population}
+              <span class="mx-2">•</span>
+              <i class="fas fa-expand-arrows-alt mr-1"></i>${district.area}
+            </div>
+          `;
+
+               listItem.appendChild(numberSpan);
+               listItem.appendChild(colorIndicator);
+               listItem.appendChild(textDiv);
+               districtsList.appendChild(listItem);
+            });
+         }
+
+         // Создаем информационные карточки
+         function createDistrictCards() {
+            districts.forEach((district, index) => {
+               const card = document.createElement('div');
+               card.className = 'bg-gray-800 rounded-xl p-4 md:p-5 border border-gray-700 hover:border-blue-500 transition-all duration-300 district-card';
+               card.dataset.districtId = district.id;
+               card.innerHTML = `
+            <div class="flex items-start justify-between mb-3 md:mb-4">
+              <div>
+                <div class="text-xs text-blue-400 font-medium mb-1">Район ${(index + 1).toString().padStart(2, '0')}</div>
+                <h3 class="text-lg md:text-xl font-bold text-white">${district.name}</h3>
+              </div>
+              <div class="w-5 h-5 md:w-6 md:h-6 rounded-full flex-shrink-0 ml-2 bg-blue-100 border border-blue-300"></div>
+            </div>
+            <div class="space-y-2 md:space-y-3 mb-3 md:mb-4">
+              <div class="flex items-center text-gray-300">
+                <i class="fas fa-users mr-2 text-blue-400 text-sm md:text-base"></i>
+                <span class="text-sm md:text-base">Население: ${district.population}</span>
+              </div>
+              <div class="flex items-center text-gray-300">
+                <i class="fas fa-expand-arrows-alt mr-2 text-blue-400 text-sm md:text-base"></i>
+                <span class="text-sm md:text-base">Площадь: ${district.area}</span>
+              </div>
+              <div class="flex items-start text-gray-300">
+                <i class="fas fa-subway mr-2 mt-0.5 md:mt-1 text-blue-400 text-sm md:text-base"></i>
+                <div class="flex-grow">
+                  <span class="block mb-1 text-sm md:text-base">Станции метро:</span>
+                  <div class="flex flex-wrap gap-1">
+                    ${district.metro.map(station =>
+                  `<span class="px-2 py-1 bg-blue-900/50 text-blue-300 rounded text-xs">${station}</span>`
+               ).join('')}
+                    ${district.metro.length === 0 ?
+                     '<span class="text-gray-500 text-sm">Нет станций метро</span>' :
+                     ''}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="text-gray-400 text-xs md:text-sm">${district.description}</p>
+          `;
+               cardsContainer.appendChild(card);
+            });
+         }
+
+         // Функция для показа карты района
+         function showDistrictMap(districtId) {
+            // Если район уже активен, ничего не делаем
+            if (activeDistrict === districtId) return;
+
+            // Сбрасываем таймер, если он был
+            if (switchTimeout) {
+               clearTimeout(switchTimeout);
+            }
+
+            // Находим район
+            const district = districts.find(d => d.id === districtId);
+            if (!district) return;
+
+            // Показываем индикатор загрузки (если изображение еще не загружено)
+            const districtImage = preloadedImages[districtId];
+            if (!districtImage.complete || districtImage.naturalWidth === 0) {
+               loadingIndicator.classList.remove('hidden');
+            }
+
+            // Скрываем все изображения районов
+            document.querySelectorAll('.district-map').forEach(img => {
+               img.classList.remove('opacity-100');
+               img.classList.add('opacity-0');
+            });
+
+            // Скрываем основную карту
+            mainMap.classList.add('opacity-0');
+
+            // Показываем изображение выбранного района
+            if (districtImage) {
+               // Небольшая задержка для плавности
+               setTimeout(() => {
+                  districtImage.classList.remove('opacity-0');
+                  districtImage.classList.add('opacity-100');
+                  loadingIndicator.classList.add('hidden');
+               }, 50);
+            }
+
+            // Обновляем активный район
+            activeDistrict = districtId;
+         }
+
+         // Функция для скрытия карты района и показа основной карты
+         function hideDistrictMap() {
+            // Сбрасываем таймер
+            if (switchTimeout) {
+               clearTimeout(switchTimeout);
+            }
+
+            // На мобильных сразу скрываем
+            if (isMobile) {
+               // Скрываем все изображения районов
+               document.querySelectorAll('.district-map').forEach(img => {
+                  img.classList.remove('opacity-100');
+                  img.classList.add('opacity-0');
+               });
+
+               // Показываем основную карту
+               mainMap.classList.remove('opacity-0');
+               mainMap.classList.add('opacity-100');
+
+               activeDistrict = null;
+               return;
+            }
+
+            // На десктопе используем таймер для плавного перехода
+            switchTimeout = setTimeout(() => {
+               // Проверяем, не начали ли мы показывать другой район
+               if (hoveredDistrict === null && activeDistrict !== null) {
+                  // Скрываем все изображения районов
+                  document.querySelectorAll('.district-map').forEach(img => {
+                     img.classList.remove('opacity-100');
+                     img.classList.add('opacity-0');
+                  });
+
+                  // Показываем основную карту
+                  mainMap.classList.remove('opacity-0');
+                  mainMap.classList.add('opacity-100');
+
+                  activeDistrict = null;
+               }
+            }, 300); // Задержка перед возвратом к основной карте
+         }
+
+         // Функция для подсветки активного элемента в списке
+         function highlightDistrictInList(districtId) {
+            // Снимаем подсветку со всех элементов
+            document.querySelectorAll('.district-list-item').forEach(item => {
+               item.classList.remove('bg-blue-100', 'border-blue-500', 'shadow-md');
+               item.querySelector('.w-4').classList.remove('bg-blue-600');
+               item.querySelector('.w-4').classList.add('bg-blue-100', 'border-blue-300');
+            });
+
+            // Подсвечиваем активный элемент
+            if (districtId) {
+               const activeItem = document.querySelector(`.district-list-item[data-district-id="${districtId}"]`);
+               if (activeItem) {
+                  activeItem.classList.add('bg-blue-100', 'border-blue-500', 'shadow-md');
+                  activeItem.querySelector('.w-4').classList.remove('bg-blue-100', 'border-blue-300');
+                  activeItem.querySelector('.w-4').classList.add('bg-blue-600');
+               }
+            }
+         }
+
+         // Функция для подсветки активной карточки
+         function highlightDistrictCard(districtId) {
+            // Снимаем подсветку со всех карточек
+            document.querySelectorAll('.district-card').forEach(card => {
+               card.classList.remove('border-blue-500', 'ring-2', 'ring-blue-500/20');
+            });
+
+            // Подсвечиваем активную карточку
+            if (districtId) {
+               const activeCard = document.querySelector(`.district-card[data-district-id="${districtId}"]`);
+               if (activeCard) {
+                  activeCard.classList.add('border-blue-500', 'ring-2', 'ring-blue-500/20');
+
+                  // Прокручиваем к карточке на мобильных
+                  if (isMobile) {
+                     activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                  }
+               }
+            }
+         }
+
+         // Инициализация
+         function initialize() {
+            console.log('Инициализация карты районов Санкт-Петербурга...');
+
+            // Создаем списки и карточки
+            createDistrictsList();
+            createDistrictCards();
+
+            // Предзагружаем изображения
+            preloadDistrictImages();
+
+            // Обработчики событий для элементов списка районов
+            document.querySelectorAll('.district-list-item').forEach(item => {
+               const districtId = item.dataset.districtId;
+
+               // Для десктопа - наведение
+               if (!isMobile) {
+                  item.addEventListener('mouseenter', () => {
+                     hoveredDistrict = districtId;
+                     showDistrictMap(districtId);
+                     highlightDistrictInList(districtId);
+                     highlightDistrictCard(districtId);
+                  });
+
+                  item.addEventListener('mouseleave', () => {
+                     hoveredDistrict = null;
+                     hideDistrictMap();
+                     highlightDistrictInList(null);
+                     highlightDistrictCard(null);
+                  });
+               }
+
+               // Для всех устройств - клик
+               item.addEventListener('click', () => {
+                  showDistrictMap(districtId);
+                  highlightDistrictInList(districtId);
+                  highlightDistrictCard(districtId);
+
+                  // На мобильных прокручиваем к карте
+                  if (isMobile) {
+                     document.querySelector('#district-main-map').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                     });
+                  }
+               });
+            });
+
+            // Обработчики событий для карточек районов
+            document.querySelectorAll('.district-card').forEach(card => {
+               const districtId = card.dataset.districtId;
+
+               card.addEventListener('mouseenter', () => {
+                  if (!isMobile) {
+                     hoveredDistrict = districtId;
+                     showDistrictMap(districtId);
+                     highlightDistrictInList(districtId);
+                     highlightDistrictCard(districtId);
+                  }
+               });
+
+               card.addEventListener('mouseleave', () => {
+                  if (!isMobile) {
+                     hoveredDistrict = null;
+                     hideDistrictMap();
+                     highlightDistrictInList(null);
+                     highlightDistrictCard(null);
+                  }
+               });
+
+               card.addEventListener('click', () => {
+                  showDistrictMap(districtId);
+                  highlightDistrictInList(districtId);
+                  highlightDistrictCard(districtId);
+               });
+            });
+
+            // Обработчик для контейнера карты (возврат к основной карте при уходе)
+            if (!isMobile) {
+               document.querySelector('#district-main-map').parentElement.addEventListener('mouseleave', () => {
+                  hoveredDistrict = null;
+                  hideDistrictMap();
+                  highlightDistrictInList(null);
+                  highlightDistrictCard(null);
+               });
+            }
+
+            // Активируем первый район по умолчанию
+            setTimeout(() => {
+               const firstDistrictId = districts[0].id;
+               showDistrictMap(firstDistrictId);
+               highlightDistrictInList(firstDistrictId);
+               highlightDistrictCard(firstDistrictId);
+            }, 1000);
+
+            console.log('Инициализация завершена');
+         }
+
+         // Запуск инициализации
+         initialize();
+
+         // Обработчик изменения размера окна
+         window.addEventListener('resize', () => {
+            isMobile = window.innerWidth < 768;
+         });
+
+         // Добавляем кнопку для прокрутки к началу карты на мобильных
+         if (window.innerWidth < 1024) {
+            const scrollToTopBtn = document.createElement('button');
+            scrollToTopBtn.className = 'fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg z-40 lg:hidden flex items-center justify-center';
+            scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+            scrollToTopBtn.title = 'Наверх карты';
+            scrollToTopBtn.addEventListener('click', () => {
+               document.querySelector('#district-main-map').parentElement.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start'
+               });
+            });
+            document.body.appendChild(scrollToTopBtn);
+         }
+      });
+   </script>
+   <script>
+      // Оценки районов по 10 критериям
+      const districtRatings = {
+         'admiralteyskiy': { price: 9, ecology: 6, infrastructure: 8, transport: 9, education: 8, medicine: 7, age: 3, safety: 7, employment: 8, traffic: 8 },
+         'vasileostrovskiy': { price: 7, ecology: 7, infrastructure: 7, transport: 8, education: 7, medicine: 6, age: 4, safety: 7, employment: 6, traffic: 7 },
+         'petrogradskiy': { price: 8, ecology: 7, infrastructure: 8, transport: 8, education: 8, medicine: 7, age: 4, safety: 8, employment: 7, traffic: 7 },
+         'vyborgskiy': { price: 5, ecology: 5, infrastructure: 6, transport: 7, education: 6, medicine: 5, age: 5, safety: 6, employment: 6, traffic: 6 },
+         'kalininskiy': { price: 4, ecology: 4, infrastructure: 7, transport: 8, education: 7, medicine: 6, age: 6, safety: 6, employment: 7, traffic: 7 },
+         'kirovskiy': { price: 3, ecology: 3, infrastructure: 6, transport: 7, education: 5, medicine: 5, age: 5, safety: 5, employment: 5, traffic: 6 },
+         'moskovskiy': { price: 5, ecology: 5, infrastructure: 8, transport: 9, education: 7, medicine: 7, age: 6, safety: 7, employment: 7, traffic: 8 },
+         'nevskiy': { price: 4, ecology: 4, infrastructure: 8, transport: 9, education: 7, medicine: 6, age: 5, safety: 6, employment: 7, traffic: 8 },
+         'frunzenskiy': { price: 5, ecology: 5, infrastructure: 7, transport: 8, education: 6, medicine: 6, age: 6, safety: 7, employment: 6, traffic: 7 },
+         'primorskiy': { price: 7, ecology: 8, infrastructure: 8, transport: 7, education: 7, medicine: 7, age: 8, safety: 8, employment: 7, traffic: 6 },
+         'krasnogvardeiskiy': { price: 4, ecology: 5, infrastructure: 7, transport: 7, education: 6, medicine: 5, age: 7, safety: 6, employment: 6, traffic: 6 },
+         'krasnoselskiy': { price: 6, ecology: 7, infrastructure: 7, transport: 6, education: 6, medicine: 6, age: 8, safety: 7, employment: 6, traffic: 5 },
+         'kolpinskiy': { price: 2, ecology: 6, infrastructure: 5, transport: 4, education: 5, medicine: 4, age: 5, safety: 6, employment: 4, traffic: 4 },
+         'pushkinskiy': { price: 6, ecology: 9, infrastructure: 6, transport: 5, education: 6, medicine: 5, age: 5, safety: 8, employment: 5, traffic: 4 },
+         'kurortnyy': { price: 5, ecology: 9, infrastructure: 5, transport: 3, education: 4, medicine: 4, age: 5, safety: 8, employment: 3, traffic: 3 },
+         'petrodvortsovyy': { price: 6, ecology: 8, infrastructure: 5, transport: 4, education: 5, medicine: 4, age: 4, safety: 8, employment: 4, traffic: 4 },
+         'kronshtadtskiy': { price: 3, ecology: 8, infrastructure: 4, transport: 3, education: 4, medicine: 4, age: 4, safety: 7, employment: 4, traffic: 3 },
+         'tsentralnyy': { price: 9, ecology: 6, infrastructure: 9, transport: 9, education: 9, medicine: 8, age: 3, safety: 7, employment: 9, traffic: 9 }
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+         // Основные переменные
+         let activeDistrict = null;
+         let hoveredDistrict = null;
+         let preloadedImages = {};
+         let isMobile = window.innerWidth < 768;
+         let switchTimeout = null;
+         let hoverTimeout = null;
+
+         // Элементы DOM
+         const districtsList = document.getElementById('districts-list');
+         const cardsContainer = document.getElementById('districts-info');
+         const mainMap = document.getElementById('district-main-map');
+         const mapsContainer = document.getElementById('district-maps-container');
+         const loadingIndicator = document.getElementById('map-loading');
+         const filterSelects = document.querySelectorAll('.filter-select');
+         const resetFiltersBtn = document.getElementById('reset-filters-btn');
+         const filterResultsContainer = document.getElementById('filter-results-container');
+         const filteredDistrictsList = document.getElementById('filtered-districts-list');
+         const filterResultsCount = document.getElementById('filter-results-count');
+         const activeResultsCount = document.getElementById('active-results-count');
+
+         // ==================== ФУНКЦИИ ФИЛЬТРАЦИИ ====================
+
+         // Функция проверки соответствия района фильтрам
+         function checkDistrictFilters(districtId) {
+            const ratings = districtRatings[districtId];
+            if (!ratings) return true;
+
+            // Проверяем каждый фильтр
+            for (const select of filterSelects) {
+               const filterName = select.dataset.filter;
+               const filterValue = parseInt(select.value);
+
+               // Если фильтр не активен, пропускаем
+               if (filterValue === 0) continue;
+
+               const districtRating = ratings[filterName];
+
+               // Для цены и пробок: район должен иметь оценку НЕ ВЫШЕ выбранной
+               if (filterName === 'price' || filterName === 'traffic') {
+                  if (districtRating > filterValue) {
+                     return false;
+                  }
+               }
+               // Для остальных критериев: район должен иметь оценку НЕ НИЖЕ выбранной
+               else {
+                  if (districtRating < filterValue) {
+                     return false;
+                  }
+               }
+            }
+
+            return true;
+         }
+
+         // Функция применения фильтров
+         function applyFilters() {
+            console.log('Применение фильтров...');
+
+            const matchingDistricts = [];
+            const activeFilters = Array.from(filterSelects).filter(select => parseInt(select.value) > 0);
+
+            // Проверяем каждый район
+            districts.forEach(district => {
+               if (checkDistrictFilters(district.id)) {
+                  matchingDistricts.push(district);
+               }
+            });
+
+            // Обновляем счетчики
+            const matchCount = matchingDistricts.length;
+            filterResultsCount.textContent = `${matchCount} ${getWordForm(matchCount, ['район', 'района', 'районов'])}`;
+            activeResultsCount.textContent = matchCount;
+
+            // Показываем/скрываем блок результатов
+            if (activeFilters.length > 0) {
+               filterResultsContainer.classList.remove('hidden');
+               updateFilteredList(matchingDistricts);
+            } else {
+               filterResultsContainer.classList.add('hidden');
+            }
+
+            // Подсвечиваем районы в основном списке
+            highlightFilteredDistricts(matchingDistricts);
+         }
+
+         // Функция обновления списка отфильтрованных районов
+         function updateFilteredList(matchingDistricts) {
+            filteredDistrictsList.innerHTML = '';
+
+            if (matchingDistricts.length === 0) {
+               filteredDistrictsList.innerHTML = `
+               <div class="text-center py-8">
+                   <i class="fas fa-search text-gray-400 text-4xl mb-3"></i>
+                   <p class="text-gray-700 font-medium">Ни один район не соответствует критериям</p>
+                   <p class="text-gray-500 text-sm mt-1">Измените значения фильтров</p>
+               </div>
+           `;
+               return;
+            }
+
+            matchingDistricts.forEach((district, index) => {
+               const ratings = districtRatings[district.id];
+               const avgScore = calculateAverageScore(ratings);
+
+               const item = document.createElement('div');
+               item.className = 'filtered-district-item bg-white p-4 rounded-lg border border-gray-200 hover:border-blue-400 hover:shadow cursor-pointer transition-all duration-200';
+               item.dataset.districtId = district.id;
+               item.innerHTML = `
+               <div class="flex items-center">
+                   <div class="flex-shrink-0 mr-4">
+                       <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold">
+                           ${index + 1}
+                       </div>
+                   </div>
+                   <div class="flex-grow">
+                       <div class="flex justify-between items-center mb-1">
+                           <h4 class="font-bold text-gray-800">${district.name}</h4>
+                           <span class="text-sm font-bold px-2 py-1 ${getScoreColor(avgScore)} rounded">
+                               ${avgScore.toFixed(1)}
+                           </span>
+                       </div>
+                       <div class="text-sm text-gray-600 mb-2">
+                           ${district.area} • ${district.population}
+                       </div>
+                       <div class="flex flex-wrap gap-1">
+                           <span class="text-xs px-2 py-1 ${getRatingColorClass(ratings.price, 'price')} rounded">
+                               Цена: ${ratings.price}/10
+                           </span>
+                           <span class="text-xs px-2 py-1 ${getRatingColorClass(ratings.ecology)} rounded">
+                               Экология: ${ratings.ecology}/10
+                           </span>
+                           <span class="text-xs px-2 py-1 ${getRatingColorClass(ratings.transport)} rounded">
+                               Транспорт: ${ratings.transport}/10
+                           </span>
+                       </div>
+                   </div>
+                   <div class="ml-2">
+                       <i class="fas fa-chevron-right text-gray-400"></i>
+                   </div>
+               </div>
+           `;
+
+               // Обработчики событий
+               item.addEventListener('mouseenter', () => {
+                  highlightDistrict(district.id);
+                  item.classList.add('bg-blue-50');
+               });
+
+               item.addEventListener('mouseleave', () => {
+                  item.classList.remove('bg-blue-50');
+               });
+
+               item.addEventListener('click', () => {
+                  highlightDistrict(district.id);
+               });
+
+               filteredDistrictsList.appendChild(item);
+            });
+         }
+
+         // Подсветка отфильтрованных районов в основном списке
+         function highlightFilteredDistricts(matchingDistricts) {
+            const matchingIds = matchingDistricts.map(d => d.id);
+
+            document.querySelectorAll('.district-list-item').forEach(item => {
+               const districtId = item.dataset.districtId;
+
+               if (matchingIds.includes(districtId)) {
+                  item.classList.remove('opacity-50');
+                  item.classList.add('border-green-200');
+               } else {
+                  item.classList.add('opacity-50');
+                  item.classList.remove('border-green-200');
+               }
+            });
+         }
+
+         // Сброс фильтров
+         function resetFilters() {
+            filterSelects.forEach(select => {
+               select.value = '0';
+            });
+
+            filterResultsContainer.classList.add('hidden');
+            filterResultsCount.textContent = '18 районов';
+            activeResultsCount.textContent = '0';
+
+            // Снимаем подсветку с основного списка
+            document.querySelectorAll('.district-list-item').forEach(item => {
+               item.classList.remove('opacity-50', 'border-green-200');
+            });
+
+            // Показываем сообщение
+            showToast('Фильтры сброшены', 'success');
+         }
+
+         // ==================== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ====================
+
+         function calculateAverageScore(ratings) {
+            const values = Object.values(ratings);
+            return values.reduce((a, b) => a + b, 0) / values.length;
+         }
+
+         function getScoreColor(score) {
+            if (score >= 8) return 'bg-green-100 text-green-800';
+            if (score >= 6) return 'bg-blue-100 text-blue-800';
+            if (score >= 4) return 'bg-yellow-100 text-yellow-800';
+            return 'bg-red-100 text-red-800';
+         }
+
+         function getRatingColorClass(rating, type = 'standard') {
+            if (type === 'price' || type === 'traffic') {
+               if (rating <= 3) return 'bg-green-100 text-green-800';
+               if (rating <= 5) return 'bg-yellow-100 text-yellow-800';
+               if (rating <= 7) return 'bg-orange-100 text-orange-800';
+               return 'bg-red-100 text-red-800';
+            } else {
+               if (rating >= 8) return 'bg-green-100 text-green-800';
+               if (rating >= 6) return 'bg-blue-100 text-blue-800';
+               if (rating >= 4) return 'bg-yellow-100 text-yellow-800';
+               return 'bg-red-100 text-red-800';
+            }
+         }
+
+         function getWordForm(number, forms) {
+            const n = Math.abs(number) % 100;
+            const n1 = n % 10;
+            if (n > 10 && n < 20) return forms[2];
+            if (n1 > 1 && n1 < 5) return forms[1];
+            if (n1 === 1) return forms[0];
+            return forms[2];
+         }
+
+         function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 animate-fade-in-up ${type === 'success' ? 'bg-green-500 text-white' :
+               type === 'error' ? 'bg-red-500 text-white' :
+                  'bg-blue-500 text-white'
+               }`;
+            toast.innerHTML = `
+           <div class="flex items-center">
+               <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'} mr-2"></i>
+               <span>${message}</span>
+           </div>
+       `;
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+               toast.style.opacity = '0';
+               toast.style.transition = 'opacity 0.3s';
+               setTimeout(() => toast.remove(), 300);
+            }, 3000);
+         }
+
+         // ==================== ОСНОВНЫЕ ФУНКЦИИ КАРТЫ ====================
+
+         // Предзагрузка изображений
+         function preloadDistrictImages() {
+            console.log('Предзагрузка изображений районов...');
+
+            districts.forEach(district => {
+               const img = new Image();
+               img.src = district.image;
+               img.alt = `Карта района ${district.name}`;
+               img.classList.add('absolute', 'inset-0', 'w-full', 'h-full', 'object-contain', 'opacity-0', 'transition-opacity', 'duration-300', 'district-map');
+               img.dataset.districtId = district.id;
+
+               preloadedImages[district.id] = img;
+               mapsContainer.appendChild(img);
+
+               img.onload = () => {
+                  console.log(`✓ ${district.name} загружено`);
+               };
+
+               img.onerror = () => {
+                  console.error(`✗ Ошибка загрузки: ${district.name}`);
+                  img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23f0f0f0"/><text x="50" y="50" text-anchor="middle" dy=".3em" fill="%23999">Нет карты</text></svg>';
+               };
+            });
+         }
+
+         // Создание списка районов
+         function createDistrictsList() {
+            districts.forEach((district, index) => {
+               const listItem = document.createElement('button');
+               listItem.className = 'district-list-item flex items-center w-full p-3 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all duration-300 cursor-pointer text-left group';
+               listItem.dataset.districtId = district.id;
+               listItem.type = 'button';
+
+               const numberSpan = document.createElement('span');
+               numberSpan.className = 'text-xs font-bold text-blue-600 mr-3';
+               numberSpan.textContent = (index + 1).toString().padStart(2, '0');
+
+               const colorIndicator = document.createElement('div');
+               colorIndicator.className = 'w-4 h-4 rounded-full mr-3 flex-shrink-0 bg-blue-100 border border-blue-300 group-hover:bg-blue-200 transition-colors';
+
+               const textDiv = document.createElement('div');
+               textDiv.className = 'flex-grow';
+               textDiv.innerHTML = `
+               <div class="font-bold text-gray-800 text-sm md:text-base group-hover:text-blue-700">${district.name}</div>
+               <div class="text-xs md:text-sm text-gray-600 mt-1">
+                   <i class="fas fa-users mr-1"></i>${district.population}
+               </div>
+           `;
+
+               listItem.appendChild(numberSpan);
+               listItem.appendChild(colorIndicator);
+               listItem.appendChild(textDiv);
+               districtsList.appendChild(listItem);
+            });
+         }
+
+         // Создание карточек районов
+         function createDistrictCards() {
+            districts.forEach((district, index) => {
+               const card = document.createElement('div');
+               card.className = 'district-card bg-gray-800 rounded-xl p-4 md:p-5 border border-gray-700 hover:border-blue-500 transition-all duration-300 group';
+               card.dataset.districtId = district.id;
+
+               const ratings = districtRatings[district.id] || {};
+
+               card.innerHTML = `
+               <div class="flex items-start justify-between mb-3">
+                   <div>
+                       <div class="text-xs text-blue-400 font-medium mb-1">Район ${(index + 1).toString().padStart(2, '0')}</div>
+                       <h3 class="text-lg font-bold text-white">${district.name}</h3>
+                   </div>
+                   <div class="w-5 h-5 rounded-full bg-blue-100"></div>
+               </div>
+               <div class="mb-3">
+                   <p class="text-gray-400 text-sm">${district.description}</p>
+               </div>
+               <div class="space-y-2">
+                   <div class="flex justify-between">
+                       <span class="text-gray-400 text-sm">Цена:</span>
+                       <span class="text-sm font-bold ${getRatingColorClass(ratings.price || 5, 'price').replace('100', '700').replace('800', '300')}">${ratings.price || 5}/10</span>
+                   </div>
+                   <div class="flex justify-between">
+                       <span class="text-gray-400 text-sm">Экология:</span>
+                       <span class="text-sm font-bold ${getRatingColorClass(ratings.ecology || 5).replace('100', '700').replace('800', '300')}">${ratings.ecology || 5}/10</span>
+                   </div>
+               </div>
+           `;
+
+               cardsContainer.appendChild(card);
+            });
+         }
+
+         // Показать карту района
+         function showDistrictMap(districtId) {
+            if (activeDistrict === districtId) return;
+
+            // Скрыть все изображения районов
+            document.querySelectorAll('.district-map').forEach(img => {
+               img.classList.remove('opacity-100');
+               img.classList.add('opacity-0');
+            });
+
+            // Показать выбранный район
+            const districtImage = preloadedImages[districtId];
+            if (districtImage) {
+               mainMap.classList.remove('opacity-100');
+               mainMap.classList.add('opacity-0');
+
+               setTimeout(() => {
+                  districtImage.classList.remove('opacity-0');
+                  districtImage.classList.add('opacity-100');
+               }, 50);
+
+               activeDistrict = districtId;
+            }
+         }
+
+         // Вернуться к основной карте
+         function showMainMap() {
+            if (hoverTimeout) clearTimeout(hoverTimeout);
+            if (switchTimeout) clearTimeout(switchTimeout);
+
+            switchTimeout = setTimeout(() => {
+               if (hoveredDistrict === null && activeDistrict !== null) {
+                  document.querySelectorAll('.district-map').forEach(img => {
+                     img.classList.remove('opacity-100');
+                     img.classList.add('opacity-0');
+                  });
+
+                  mainMap.classList.remove('opacity-0');
+                  mainMap.classList.add('opacity-100');
+
+                  activeDistrict = null;
+                  highlightDistrictInList(null);
+                  highlightDistrictCard(null);
+               }
+            }, 300);
+         }
+
+         // Подсветка в списке
+         function highlightDistrictInList(districtId) {
+            document.querySelectorAll('.district-list-item').forEach(item => {
+               item.classList.remove('bg-blue-100', 'border-blue-500', 'shadow-md');
+               item.querySelector('.w-4').classList.remove('bg-blue-600');
+               item.querySelector('.w-4').classList.add('bg-blue-100', 'border-blue-300');
+            });
+
+            if (districtId) {
+               const activeItem = document.querySelector(`.district-list-item[data-district-id="${districtId}"]`);
+               if (activeItem) {
+                  activeItem.classList.add('bg-blue-100', 'border-blue-500', 'shadow-md');
+                  activeItem.querySelector('.w-4').classList.remove('bg-blue-100', 'border-blue-300');
+                  activeItem.querySelector('.w-4').classList.add('bg-blue-600');
+               }
+            }
+         }
+
+         // Подсветка карточки
+         function highlightDistrictCard(districtId) {
+            document.querySelectorAll('.district-card').forEach(card => {
+               card.classList.remove('border-blue-500', 'ring-2', 'ring-blue-500/20');
+            });
+
+            if (districtId) {
+               const activeCard = document.querySelector(`.district-card[data-district-id="${districtId}"]`);
+               if (activeCard) {
+                  activeCard.classList.add('border-blue-500', 'ring-2', 'ring-blue-500/20');
+               }
+            }
+         }
+
+         // Подсветка района (общая функция)
+         function highlightDistrict(districtId) {
+            showDistrictMap(districtId);
+            highlightDistrictInList(districtId);
+            highlightDistrictCard(districtId);
+
+            // Подсветка в отфильтрованном списке
+            document.querySelectorAll('.filtered-district-item').forEach(item => {
+               item.classList.remove('bg-blue-50', 'border-blue-400');
+               if (item.dataset.districtId === districtId) {
+                  item.classList.add('bg-blue-50', 'border-blue-400');
+               }
+            });
+         }
+
+         // ==================== ИНИЦИАЛИЗАЦИЯ ====================
+
+         function initialize() {
+            console.log('Инициализация системы...');
+
+            // Создаем основные элементы
+            createDistrictsList();
+            createDistrictCards();
+            preloadDistrictImages();
+
+            // Настройка фильтров
+            filterSelects.forEach(select => {
+               select.addEventListener('change', applyFilters);
+            });
+
+            // Кнопка сброса фильтров
+            resetFiltersBtn.addEventListener('click', resetFilters);
+
+            // Обработчики для элементов списка районов
+            document.querySelectorAll('.district-list-item').forEach(item => {
+               const districtId = item.dataset.districtId;
+
+               // Для десктопа
+               if (!isMobile) {
+                  item.addEventListener('mouseenter', () => {
+                     if (hoverTimeout) clearTimeout(hoverTimeout);
+                     hoveredDistrict = districtId;
+                     highlightDistrict(districtId);
+                  });
+
+                  item.addEventListener('mouseleave', () => {
+                     hoveredDistrict = null;
+                     hoverTimeout = setTimeout(() => {
+                        showMainMap();
+                     }, 100);
+                  });
+               }
+
+               // Клик для всех устройств
+               item.addEventListener('click', (e) => {
+                  e.stopPropagation();
+                  highlightDistrict(districtId);
+               });
+            });
+
+            // Обработчики для карточек районов
+            document.querySelectorAll('.district-card').forEach(card => {
+               const districtId = card.dataset.districtId;
+
+               if (!isMobile) {
+                  card.addEventListener('mouseenter', () => {
+                     if (hoverTimeout) clearTimeout(hoverTimeout);
+                     hoveredDistrict = districtId;
+                     highlightDistrict(districtId);
+                  });
+
+                  card.addEventListener('mouseleave', () => {
+                     hoveredDistrict = null;
+                     hoverTimeout = setTimeout(() => {
+                        showMainMap();
+                     }, 100);
+                  });
+               }
+
+               card.addEventListener('click', (e) => {
+                  e.stopPropagation();
+                  highlightDistrict(districtId);
+               });
+            });
+
+            // Обработчик для карты
+            mainMap.parentElement.addEventListener('mouseleave', () => {
+               if (!isMobile) {
+                  hoveredDistrict = null;
+                  showMainMap();
+               }
+            });
+
+            // Активируем первый район
+            setTimeout(() => {
+               if (districts.length > 0) {
+                  highlightDistrict(districts[0].id);
+               }
+            }, 1000);
+
+            // Применяем начальные фильтры
+            applyFilters();
+         }
+
+         // Запуск инициализации
+         initialize();
+
+         // Обработчик изменения размера окна
+         window.addEventListener('resize', () => {
+            isMobile = window.innerWidth < 768;
+         });
+      });
+   </script> -->
+
+
+   <!-- Футер -->
+   <footer class="bg-gray-900 text-white py-12">
+      <div class="content-container px-4">
+         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+               <h3 class="text-xl font-bold mb-4 gradient-text">Григорьева Ольга</h3>
+               <p class="text-gray-400 leading-relaxed">
+                  Профессиональный риелтор по купле и продаже недвижимости в Москве и области.
+                  Работаю на результат и довольных клиентов.
+               </p>
+            </div>
+
+            <div>
+               <h4 class="text-lg font-bold mb-4 text-blue-300">Услуги</h4>
+               <ul class="space-y-2">
+                  <li><a href="#buy-apartment" class="text-gray-400 hover:text-white transition">Купить квартиру</a>
+                  </li>
+                  <li><a href="#buy-room" class="text-gray-400 hover:text-white transition">Купить комнату</a></li>
+                  <li><a href="#sell-property" class="text-gray-400 hover:text-white transition">Продать
+                        недвижимость</a></li>
+                  <li><a href="./vibor-rayon-spb.html" class="text-gray-400 hover:text-white transition">Выбор
+                        района</a></li>
+                  <li><a href="#blog" class="text-gray-400 hover:text-white transition">Блог о недвижимости</a></li>
+               </ul>
+            </div>
+
+            <div>
+               <h4 class="text-lg font-bold mb-4 text-blue-300">Контакты</h4>
+               <ul class="space-y-3">
+                  <li class="flex items-center">
+                     <i class="fas fa-phone mr-3 text-blue-400"></i>
+                     <a href="tel:+79991234567" class="text-gray-400 hover:text-white">+7 (999) 123-45-67</a>
+                  </li>
+                  <li class="flex items-center">
+                     <i class="fas fa-envelope mr-3 text-blue-400"></i>
+                     <a href="mailto:olga@example.com" class="text-gray-400 hover:text-white">olga@example.com</a>
+                  </li>
+                  <li class="flex items-center">
+                     <i class="fas fa-map-marker-alt mr-3 text-blue-400"></i>
+                     <span class="text-gray-400">Москва, ул. Примерная, д. 10</span>
+                  </li>
+               </ul>
+            </div>
+
+            <div>
+               <h4 class="text-lg font-bold mb-4 text-blue-300">Социальные сети</h4>
+               <div class="flex space-x-3 mb-4">
+                  <a href="https://vk.com/example" target="_blank"
+                     class="bg-blue-700 hover:bg-blue-600 text-white p-3 rounded-lg transition transform hover:scale-110">
+                     <i class="fab fa-vk"></i>
+                  </a>
+                  <a href="https://t.me/example" target="_blank"
+                     class="bg-blue-500 hover:bg-blue-400 text-white p-3 rounded-lg transition transform hover:scale-110">
+                     <i class="fab fa-telegram"></i>
+                  </a>
+                  <a href="https://wa.me/79991234567" target="_blank"
+                     class="bg-green-600 hover:bg-green-500 text-white p-3 rounded-lg transition transform hover:scale-110">
+                     <i class="fab fa-whatsapp"></i>
+                  </a>
+               </div>
+               <p class="text-gray-500 text-sm">Подпишитесь на мои обновления в соцсетях</p>
+            </div>
+         </div>
+
+         <div class="border-t border-gray-800 pt-8 text-center">
+            <p class="text-gray-500">&copy; 2023 Григорьева Ольга - Риелтор. Все права защищены.</p>
+            <p class="text-gray-600 text-sm mt-2">Агентство недвижимости "Авентин" | ИНН: 1234567890 | ОГРН:
+               1234567890123
+            </p>
+         </div>
+      </div>
+   </footer>
+   <script>
+      // Основной скрипт с функциями
+      document.addEventListener('DOMContentLoaded', function () {
+         console.log('DOM загружен, начинаю инициализацию...');
+
+         // Проверка наличия массивов
+         console.log('districts определен:', typeof districts !== 'undefined');
+         console.log('districtRatings определен:', typeof districtRatings !== 'undefined');
+
+         if (typeof districts === 'undefined') {
+            console.error('ОШИБКА: массив districts не определен!');
+            alert('Ошибка загрузки данных о районах. Пожалуйста, обновите страницу.');
+            return;
+         }
+
+         if (typeof districtRatings === 'undefined') {
+            console.error('ОШИБКА: массив districtRatings не определен!');
+            alert('Ошибка загрузки оценок районов. Пожалуйста, обновите страницу.');
+            return;
+         }
+
+         console.log('Всего районов:', districts.length);
+
+         // Основные переменные
+         let activeDistrict = null;
+         let hoveredDistrict = null;
+         let preloadedImages = {};
+         let isMobile = window.innerWidth < 768;
+         let switchTimeout = null;
+         let hoverTimeout = null;
+
+         // Элементы DOM
+         const districtsList = document.getElementById('districts-list');
+         const cardsContainer = document.getElementById('districts-info');
+         const mainMap = document.getElementById('district-main-map');
+         const mapsContainer = document.getElementById('district-maps-container');
+         const loadingIndicator = document.getElementById('map-loading');
+         const filterSelects = document.querySelectorAll('.filter-select');
+         const resetFiltersBtn = document.getElementById('reset-filters-btn');
+         const filterResultsContainer = document.getElementById('filter-results-container');
+         const filteredDistrictsList = document.getElementById('filtered-districts-list');
+         const filterResultsCount = document.getElementById('filter-results-count');
+         const activeResultsCount = document.getElementById('active-results-count');
+
+         // Маппинг названий критериев
+         const filterLabels = {
+            'price': 'Цена',
+            'ecology': 'Экология',
+            'infrastructure': 'Инфраструктура',
+            'transport': 'Транспорт',
+            'education': 'Образование',
+            'medicine': 'Медицина',
+            'age': 'Возраст района',
+            'safety': 'Безопасность',
+            'employment': 'Трудоустройство',
+            'traffic': 'Пробки'
+         };
+
+         // Маппинг иконок для критериев
+         const filterIcons = {
+            'price': 'money-bill-wave',
+            'ecology': 'leaf',
+            'infrastructure': 'building',
+            'transport': 'subway',
+            'education': 'graduation-cap',
+            'medicine': 'hospital',
+            'age': 'history',
+            'safety': 'shield-alt',
+            'employment': 'briefcase',
+            'traffic': 'traffic-light'
+         };
+
+         // ==================== ФУНКЦИИ ФИЛЬТРАЦИИ ====================
+
+         // Функция получения активных фильтров
+         function getActiveFilters() {
+            const activeFilters = {};
+            filterSelects.forEach(select => {
+               const filterName = select.dataset.filter;
+               const filterValue = parseInt(select.value);
+               if (filterValue > 0) {
+                  activeFilters[filterName] = filterValue;
+               }
+            });
+            return activeFilters;
+         }
+
+         // Функция проверки соответствия района фильтрам
+         function checkDistrictFilters(districtId) {
+            const ratings = districtRatings[districtId];
+            if (!ratings) return true;
+
+            const activeFilters = getActiveFilters();
+
+            // Если нет активных фильтров, показываем все районы
+            if (Object.keys(activeFilters).length === 0) {
+               return true;
+            }
+
+            // Проверяем каждый активный фильтр
+            for (const [filterName, filterValue] of Object.entries(activeFilters)) {
+               const districtRating = ratings[filterName];
+
+               // Для цены и пробок: район должен иметь оценку НЕ ВЫШЕ выбранной
+               if (filterName === 'price' || filterName === 'traffic') {
+                  if (districtRating > filterValue) {
+                     return false;
+                  }
+               }
+               // Для остальных критериев: район должен иметь оценку НЕ НИЖЕ выбранной
+               else {
+                  if (districtRating < filterValue) {
+                     return false;
+                  }
+               }
+            }
+
+            return true;
+         }
+
+         // Функция применения фильтров
+         function applyFilters() {
+            console.log('Применение фильтров...');
+
+            const matchingDistricts = [];
+            const activeFilters = getActiveFilters();
+
+            // Проверяем каждый район
+            districts.forEach(district => {
+               if (checkDistrictFilters(district.id)) {
+                  matchingDistricts.push(district);
+               }
+            });
+
+            // Обновляем счетчики
+            const matchCount = matchingDistricts.length;
+            filterResultsCount.textContent = `${matchCount} ${getWordForm(matchCount, ['район', 'района', 'районов'])}`;
+            activeResultsCount.textContent = matchCount;
+
+            // Показываем/скрываем блок результатов
+            if (Object.keys(activeFilters).length > 0) {
+               filterResultsContainer.classList.remove('hidden');
+               updateFilteredList(matchingDistricts, activeFilters);
+            } else {
+               filterResultsContainer.classList.add('hidden');
+            }
+
+            // Подсвечиваем районы в основном списке
+            highlightFilteredDistricts(matchingDistricts);
+         }
+
+         // Функция создания блока с активными фильтрами
+         function createActiveFiltersBadges(activeFilters) {
+            if (Object.keys(activeFilters).length === 0) {
+               return '';
+            }
+
+            let badges = '<div class="flex flex-wrap gap-2 mb-3">';
+
+            for (const [filterName, filterValue] of Object.entries(activeFilters)) {
+               const label = filterLabels[filterName];
+               const icon = filterIcons[filterName];
+
+               badges += `
+                      <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-100 text-blue-800">
+                          <i class="fas fa-${icon} mr-2"></i>
+                          ${label}: ${filterValue}/10
+                      </span>
+                  `;
+            }
+
+            badges += '</div>';
+            return badges;
+         }
+
+         // Функция создания блока с оценками по активным фильтрам
+         function createDistrictRatingsBadges(districtId, activeFilters) {
+            if (Object.keys(activeFilters).length === 0) {
+               return '';
+            }
+
+            const ratings = districtRatings[districtId];
+            let badges = '<div class="flex flex-wrap gap-2 mt-2">';
+
+            for (const [filterName, filterValue] of Object.entries(activeFilters)) {
+               const districtRating = ratings[filterName];
+               const label = filterLabels[filterName];
+               const icon = filterIcons[filterName];
+               const isGoodMatch = checkFilterMatch(districtRating, filterValue, filterName);
+
+               badges += `
+                      <span class="inline-flex items-center px-2 py-1 rounded text-xs ${isGoodMatch ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+                          <i class="fas fa-${icon} mr-1"></i>
+                          ${label}: ${districtRating}/10
+                      </span>
+                  `;
+            }
+
+            badges += '</div>';
+            return badges;
+         }
+
+         // Функция проверки соответствия оценки фильтру
+         function checkFilterMatch(districtRating, filterValue, filterName) {
+            if (filterName === 'price' || filterName === 'traffic') {
+               return districtRating <= filterValue;
+            } else {
+               return districtRating >= filterValue;
+            }
+         }
+
+         // Функция обновления списка отфильтрованных районов
+         function updateFilteredList(matchingDistricts, activeFilters) {
+            filteredDistrictsList.innerHTML = '';
+
+            if (matchingDistricts.length === 0) {
+               filteredDistrictsList.innerHTML = `
+                      <div class="text-center py-8">
+                          <i class="fas fa-search text-gray-400 text-4xl mb-3"></i>
+                          <p class="text-gray-700 font-medium">Ни один район не соответствует критериям</p>
+                          <p class="text-gray-500 text-sm mt-1">Измените значения фильтров</p>
+                      </div>
+                  `;
+               return;
+            }
+
+            // Добавляем блок с активными фильтрами
+            const activeFiltersBadges = createActiveFiltersBadges(activeFilters);
+            if (activeFiltersBadges) {
+               const filtersHeader = document.createElement('div');
+               filtersHeader.className = 'mb-4 p-3 bg-blue-50 rounded-lg';
+               filtersHeader.innerHTML = `
+                      <div class="text-sm font-medium text-blue-800 mb-2">Активные критерии поиска:</div>
+                      ${activeFiltersBadges}
+                  `;
+               filteredDistrictsList.appendChild(filtersHeader);
+            }
+
+            matchingDistricts.forEach((district, index) => {
+               const ratings = districtRatings[district.id];
+               const avgScore = calculateAverageScore(ratings);
+               const districtBadges = createDistrictRatingsBadges(district.id, activeFilters);
+
+               const item = document.createElement('div');
+               item.className = 'filtered-district-item bg-white p-4 rounded-lg border border-gray-200 hover:border-blue-400 hover:shadow cursor-pointer transition-all duration-200 mb-3';
+               item.dataset.districtId = district.id;
+               item.innerHTML = `
+                      <div class="flex items-start">
+                          <div class="flex-shrink-0 mr-4">
+                              <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg">
+                                  ${index + 1}
+                              </div>
+                          </div>
+                          <div class="flex-grow">
+                              <div class="flex justify-between items-start mb-2">
+                                  <div>
+                                      <h4 class="font-bold text-gray-800 text-lg">${district.name}</h4>
+                                      <div class="text-sm text-gray-600 mt-1">
+                                          <i class="fas fa-expand-arrows-alt mr-1"></i>${district.area}
+                                          <span class="mx-2">•</span>
+                                          <i class="fas fa-users mr-1"></i>${district.population}
+                                      </div>
+                                  </div>
+                                  <div class="text-right">
+                                      <div class="text-xs text-gray-500 mb-1">Общий балл</div>
+                                      <span class="text-sm font-bold px-3 py-1 ${getScoreColor(avgScore)} rounded-full">
+                                          ${avgScore.toFixed(1)}/10
+                                      </span>
+                                  </div>
+                              </div>
+                              
+                              <p class="text-gray-600 text-sm mb-3">${district.description}</p>
+                              
+                              ${districtBadges}
+                              
+                              <div class="mt-3 flex items-center justify-between">
+                                  <div class="text-xs text-gray-500">
+                                      <i class="fas fa-subway mr-1"></i>
+                                      ${district.metro.length} станций метро
+                                  </div>
+                                  <div class="text-blue-600 text-sm font-medium">
+                                      <i class="fas fa-eye mr-1"></i>
+                                      Наведите для просмотра
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  `;
+
+               // Обработчики событий
+               item.addEventListener('mouseenter', () => {
+                  highlightDistrict(district.id);
+                  item.classList.add('bg-blue-50');
+               });
+
+               item.addEventListener('mouseleave', () => {
+                  item.classList.remove('bg-blue-50');
+               });
+
+               item.addEventListener('click', () => {
+                  highlightDistrict(district.id);
+                  // Прокручиваем к карте на мобильных
+                  if (window.innerWidth < 768) {
+                     setTimeout(() => {
+                        document.querySelector('#district-main-map').scrollIntoView({
+                           behavior: 'smooth',
+                           block: 'center'
+                        });
+                     }, 300);
+                  }
+               });
+
+               filteredDistrictsList.appendChild(item);
+            });
+         }
+
+         // Подсветка отфильтрованных районов в основном списке
+         function highlightFilteredDistricts(matchingDistricts) {
+            const matchingIds = matchingDistricts.map(d => d.id);
+
+            document.querySelectorAll('.district-list-item').forEach(item => {
+               const districtId = item.dataset.districtId;
+
+               if (matchingIds.includes(districtId)) {
+                  item.classList.remove('opacity-50');
+                  item.classList.add('border-green-200');
+               } else {
+                  item.classList.add('opacity-50');
+                  item.classList.remove('border-green-200');
+               }
+            });
+         }
+
+         // Сброс фильтров
+         function resetFilters() {
+            filterSelects.forEach(select => {
+               select.value = '0';
+            });
+
+            filterResultsContainer.classList.add('hidden');
+            filterResultsCount.textContent = '18 районов';
+            activeResultsCount.textContent = '0';
+
+            // Снимаем подсветку с основного списка
+            document.querySelectorAll('.district-list-item').forEach(item => {
+               item.classList.remove('opacity-50', 'border-green-200');
+            });
+
+            // Показываем сообщение
+            showToast('Фильтры сброшены', 'success');
+
+            // Применяем фильтры (покажем все районы)
+            applyFilters();
+         }
+
+         // ==================== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ====================
+
+         function calculateAverageScore(ratings) {
+            const values = Object.values(ratings);
+            return values.reduce((a, b) => a + b, 0) / values.length;
+         }
+
+         function getScoreColor(score) {
+            if (score >= 8) return 'bg-green-100 text-green-800';
+            if (score >= 6.5) return 'bg-blue-100 text-blue-800';
+            if (score >= 5) return 'bg-yellow-100 text-yellow-800';
+            return 'bg-red-100 text-red-800';
+         }
+
+         function getRatingColorClass(rating, type = 'standard') {
+            if (type === 'price' || type === 'traffic') {
+               if (rating <= 3) return 'bg-green-100 text-green-800';
+               if (rating <= 5) return 'bg-yellow-100 text-yellow-800';
+               if (rating <= 7) return 'bg-orange-100 text-orange-800';
+               return 'bg-red-100 text-red-800';
+            } else {
+               if (rating >= 8) return 'bg-green-100 text-green-800';
+               if (rating >= 6) return 'bg-blue-100 text-blue-800';
+               if (rating >= 4) return 'bg-yellow-100 text-yellow-800';
+               return 'bg-red-100 text-red-800';
+            }
+         }
+
+         function getWordForm(number, forms) {
+            const n = Math.abs(number) % 100;
+            const n1 = n % 10;
+            if (n > 10 && n < 20) return forms[2];
+            if (n1 > 1 && n1 < 5) return forms[1];
+            if (n1 === 1) return forms[0];
+            return forms[2];
+         }
+
+         function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 animate-fade-in-up ${type === 'success' ? 'bg-green-500 text-white' :
+               type === 'error' ? 'bg-red-500 text-white' :
+                  'bg-blue-500 text-white'
+               }`;
+            toast.innerHTML = `
+                  <div class="flex items-center">
+                      <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'} mr-2"></i>
+                      <span>${message}</span>
+                  </div>
+              `;
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+               toast.style.opacity = '0';
+               toast.style.transition = 'opacity 0.3s';
+               setTimeout(() => toast.remove(), 300);
+            }, 3000);
+         }
+
+         // ==================== ОСНОВНЫЕ ФУНКЦИИ КАРТЫ ====================
+
+         // Предзагрузка изображений
+         function preloadDistrictImages() {
+            console.log('Предзагрузка изображений районов...');
+
+            districts.forEach(district => {
+               const img = new Image();
+               img.src = district.image;
+               img.alt = `Карта района ${district.name}`;
+               img.classList.add('absolute', 'inset-0', 'w-full', 'h-full', 'object-contain', 'opacity-0', 'transition-opacity', 'duration-300', 'district-map');
+               img.dataset.districtId = district.id;
+
+               preloadedImages[district.id] = img;
+               mapsContainer.appendChild(img);
+
+               img.onload = () => {
+                  console.log(`✓ ${district.name} загружено`);
+               };
+
+               img.onerror = () => {
+                  console.error(`✗ Ошибка загрузки: ${district.name}`);
+                  img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23f0f0f0"/><text x="50" y="50" text-anchor="middle" dy=".3em" fill="%23999">Нет карты</text></svg>';
+               };
+            });
+         }
+
+         // Создание списка районов
+         function createDistrictsList() {
+            console.log('Создание списка районов...');
+            console.log('Количество районов для отображения:', districts.length);
+
+            // Проверка, существует ли элемент для списка
+            if (!districtsList) {
+               console.error('Элемент #districts-list не найден!');
+               return;
+            }
+
+            districtsList.innerHTML = '';
+
+            districts.forEach((district, index) => {
+               const listItem = document.createElement('button');
+               listItem.className = 'district-list-item flex items-center w-full p-3 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all duration-300 cursor-pointer text-left group';
+               listItem.dataset.districtId = district.id;
+               listItem.type = 'button';
+               listItem.title = `Показать ${district.name} на карте`;
+
+               const numberSpan = document.createElement('span');
+               numberSpan.className = 'text-xs font-bold text-blue-600 mr-3';
+               numberSpan.textContent = (index + 1).toString().padStart(2, '0');
+
+               const colorIndicator = document.createElement('div');
+               colorIndicator.className = 'w-4 h-4 rounded-full mr-3 flex-shrink-0 bg-blue-100 border border-blue-300 group-hover:bg-blue-200 transition-colors';
+
+               const textDiv = document.createElement('div');
+               textDiv.className = 'flex-grow';
+               textDiv.innerHTML = `
+                      <div class="font-bold text-gray-800 text-sm md:text-base group-hover:text-blue-700">${district.name}</div>
+                      <div class="text-xs md:text-sm text-gray-600 mt-1">
+                          <i class="fas fa-users mr-1"></i>${district.population}
+                      </div>
+                  `;
+
+               listItem.appendChild(numberSpan);
+               listItem.appendChild(colorIndicator);
+               listItem.appendChild(textDiv);
+               districtsList.appendChild(listItem);
+            });
+
+            console.log('Список районов создан успешно');
+         }
+
+         // Создание карточек районов
+         function createDistrictCards() {
+            console.log('Создание карточек районов...');
+
+            // Проверка, существует ли элемент для карточек
+            if (!cardsContainer) {
+               console.error('Элемент #districts-info не найден!');
+               return;
+            }
+
+            cardsContainer.innerHTML = '';
+
+            districts.forEach((district, index) => {
+               const card = document.createElement('div');
+               card.className = 'district-card bg-gray-800 rounded-xl p-4 md:p-5 border border-gray-700 hover:border-blue-500 transition-all duration-300 group';
+               card.dataset.districtId = district.id;
+
+               const ratings = districtRatings[district.id] || {};
+
+               card.innerHTML = `
+                      <div class="flex items-start justify-between mb-3">
+                          <div>
+                              <div class="text-xs text-blue-400 font-medium mb-1">Район ${(index + 1).toString().padStart(2, '0')}</div>
+                              <h3 class="text-lg font-bold text-white">${district.name}</h3>
+                          </div>
+                          <div class="w-5 h-5 rounded-full bg-blue-100"></div>
+                      </div>
+                      <div class="mb-3">
+                          <p class="text-gray-400 text-sm">${district.description}</p>
+                      </div>
+                      <div class="space-y-2">
+                          <div class="flex justify-between">
+                              <span class="text-gray-400 text-sm">Цена:</span>
+                              <span class="text-sm font-bold ${getRatingColorClass(ratings.price || 5, 'price').replace('100', '700').replace('800', '300')}">${ratings.price || 5}/10</span>
+                          </div>
+                          <div class="flex justify-between">
+                              <span class="text-gray-400 text-sm">Экология:</span>
+                              <span class="text-sm font-bold ${getRatingColorClass(ratings.ecology || 5).replace('100', '700').replace('800', '300')}">${ratings.ecology || 5}/10</span>
+                          </div>
+                      </div>
+                  `;
+
+               cardsContainer.appendChild(card);
+            });
+
+            console.log('Карточки районов созданы успешно');
+         }
+
+         // Показать карту района
+         function showDistrictMap(districtId) {
+            if (activeDistrict === districtId) return;
+
+            // Скрыть все изображения районов
+            document.querySelectorAll('.district-map').forEach(img => {
+               img.classList.remove('opacity-100');
+               img.classList.add('opacity-0');
+            });
+
+            // Показать выбранный район
+            const districtImage = preloadedImages[districtId];
+            if (districtImage) {
+               mainMap.classList.remove('opacity-100');
+               mainMap.classList.add('opacity-0');
+
+               setTimeout(() => {
+                  districtImage.classList.remove('opacity-0');
+                  districtImage.classList.add('opacity-100');
+               }, 50);
+
+               activeDistrict = districtId;
+            }
+         }
+
+         // Вернуться к основной карте
+         function showMainMap() {
+            if (hoverTimeout) clearTimeout(hoverTimeout);
+            if (switchTimeout) clearTimeout(switchTimeout);
+
+            switchTimeout = setTimeout(() => {
+               if (hoveredDistrict === null && activeDistrict !== null) {
+                  document.querySelectorAll('.district-map').forEach(img => {
+                     img.classList.remove('opacity-100');
+                     img.classList.add('opacity-0');
+                  });
+
+                  mainMap.classList.remove('opacity-0');
+                  mainMap.classList.add('opacity-100');
+
+                  activeDistrict = null;
+                  highlightDistrictInList(null);
+                  highlightDistrictCard(null);
+               }
+            }, 300);
+         }
+
+         // Подсветка в списке
+         function highlightDistrictInList(districtId) {
+            document.querySelectorAll('.district-list-item').forEach(item => {
+               item.classList.remove('bg-blue-100', 'border-blue-500', 'shadow-md');
+               item.querySelector('.w-4').classList.remove('bg-blue-600');
+               item.querySelector('.w-4').classList.add('bg-blue-100', 'border-blue-300');
+            });
+
+            if (districtId) {
+               const activeItem = document.querySelector(`.district-list-item[data-district-id="${districtId}"]`);
+               if (activeItem) {
+                  activeItem.classList.add('bg-blue-100', 'border-blue-500', 'shadow-md');
+                  activeItem.querySelector('.w-4').classList.remove('bg-blue-100', 'border-blue-300');
+                  activeItem.querySelector('.w-4').classList.add('bg-blue-600');
+               }
+            }
+         }
+
+         // Подсветка карточки
+         function highlightDistrictCard(districtId) {
+            document.querySelectorAll('.district-card').forEach(card => {
+               card.classList.remove('border-blue-500', 'ring-2', 'ring-blue-500/20');
+            });
+
+            if (districtId) {
+               const activeCard = document.querySelector(`.district-card[data-district-id="${districtId}"]`);
+               if (activeCard) {
+                  activeCard.classList.add('border-blue-500', 'ring-2', 'ring-blue-500/20');
+               }
+            }
+         }
+
+         // Подсветка района (общая функция)
+         function highlightDistrict(districtId) {
+            showDistrictMap(districtId);
+            highlightDistrictInList(districtId);
+            highlightDistrictCard(districtId);
+
+            // Подсветка в отфильтрованном списке
+            document.querySelectorAll('.filtered-district-item').forEach(item => {
+               item.classList.remove('bg-blue-50', 'border-blue-400');
+               if (item.dataset.districtId === districtId) {
+                  item.classList.add('bg-blue-50', 'border-blue-400');
+               }
+            });
+         }
+
+         // ==================== ИНИЦИАЛИЗАЦИЯ ====================
+
+         function initialize() {
+            console.log('Инициализация системы...');
+
+            // Проверка наличия необходимых элементов DOM
+            const requiredElements = [
+               { id: 'districts-list', element: districtsList },
+               { id: 'districts-info', element: cardsContainer },
+               { id: 'district-main-map', element: mainMap },
+               { id: 'district-maps-container', element: mapsContainer }
+            ];
+
+            for (const req of requiredElements) {
+               if (!req.element) {
+                  console.error(`ОШИБКА: элемент #${req.id} не найден!`);
+               }
+            }
+
+            // Создаем основные элементы
+            createDistrictsList();
+            createDistrictCards();
+            preloadDistrictImages();
+
+            // Настройка фильтров
+            if (filterSelects.length > 0) {
+               filterSelects.forEach(select => {
+                  select.addEventListener('change', applyFilters);
+               });
+               console.log('Фильтры инициализированы:', filterSelects.length);
+            } else {
+               console.warn('Предупреждение: фильтры не найдены');
+            }
+
+            // Кнопка сброса фильтров
+            if (resetFiltersBtn) {
+               resetFiltersBtn.addEventListener('click', resetFilters);
+               console.log('Кнопка сброса фильтров инициализирована');
+            }
+
+            // Обработчики для элементов списка районов
+            document.querySelectorAll('.district-list-item').forEach(item => {
+               const districtId = item.dataset.districtId;
+
+               // Для десктопа
+               if (!isMobile) {
+                  item.addEventListener('mouseenter', () => {
+                     if (hoverTimeout) clearTimeout(hoverTimeout);
+                     hoveredDistrict = districtId;
+                     highlightDistrict(districtId);
+                  });
+
+                  item.addEventListener('mouseleave', () => {
+                     hoveredDistrict = null;
+                     hoverTimeout = setTimeout(() => {
+                        showMainMap();
+                     }, 100);
+                  });
+               }
+
+               // Клик для всех устройств
+               item.addEventListener('click', (e) => {
+                  e.stopPropagation();
+                  highlightDistrict(districtId);
+               });
+            });
+
+            // Обработчики для карточек районов
+            document.querySelectorAll('.district-card').forEach(card => {
+               const districtId = card.dataset.districtId;
+
+               if (!isMobile) {
+                  card.addEventListener('mouseenter', () => {
+                     if (hoverTimeout) clearTimeout(hoverTimeout);
+                     hoveredDistrict = districtId;
+                     highlightDistrict(districtId);
+                  });
+
+                  card.addEventListener('mouseleave', () => {
+                     hoveredDistrict = null;
+                     hoverTimeout = setTimeout(() => {
+                        showMainMap();
+                     }, 100);
+                  });
+               }
+
+               card.addEventListener('click', (e) => {
+                  e.stopPropagation();
+                  highlightDistrict(districtId);
+               });
+            });
+
+            // Обработчик для карты
+            if (mainMap && mainMap.parentElement) {
+               mainMap.parentElement.addEventListener('mouseleave', () => {
+                  if (!isMobile) {
+                     hoveredDistrict = null;
+                     showMainMap();
+                  }
+               });
+            }
+
+            // Активируем первый район
+            setTimeout(() => {
+               if (districts.length > 0) {
+                  highlightDistrict(districts[0].id);
+                  console.log('Первый район активирован:', districts[0].name);
+               }
+            }, 1000);
+
+            // Применяем начальные фильтры
+            applyFilters();
+
+            console.log('Инициализация завершена успешно');
+         }
+         
+
+
+         // Запуск инициализации
+         console.log('Запускаю инициализацию...');
+         try {
+            initialize();
+
+            console.log('Инициализация выполнена успешно');
+         } catch (error) {
+            console.error('Ошибка при инициализации:', error);
+            alert('Произошла ошибка при загрузке страницы. Пожалуйста, обновите страницу или свяжитесь с администратором.');
+         }
+
+         // Обработчик изменения размера окна
+         window.addEventListener('resize', () => {
+            isMobile = window.innerWidth < 768;
+         });
+      });
+
+   </script>
+
+</body>
+
+</html>
